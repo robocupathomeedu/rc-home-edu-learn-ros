@@ -1,0 +1,26 @@
+<launch>
+    <node name="dynamixel_manager" pkg="dynamixel_controllers" type="controller_manager.py" required="true" output="screen">
+        <rosparam>
+            namespace: dxl_manager
+            serial_ports:
+                pan_tilt_port:
+                    port_name: "/dev/ttyUSB0"
+                    baud_rate: 1000000
+                    min_motor_id: 1
+                    max_motor_id: 5
+                    update_rate: 20
+        </rosparam>
+    </node>
+
+    <!-- Start tilt joint controller -->
+    <rosparam file="$(find rchomeedu_arm)/param/joints.yaml" command="load"/>
+    <node name="tilt_controller_spawner" pkg="dynamixel_controllers" type="controller_spawner.py"
+          args="--manager=dxl_manager
+                --port pan_tilt_port
+                waist_controller
+                shoulder_controller
+                elbow_controller
+                wrist_controller
+                hand_controller"
+          output="screen"/>
+</launch>
