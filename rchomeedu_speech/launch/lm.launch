@@ -16,7 +16,7 @@
     -->
 	<node
 		name="lm_control"
-		pkg="pocketsphinx"
+		pkg="rchomeedu_speech"
 		type="lm_test.py"
         output="screen"
         >
