@@ -1,4 +1,4 @@
-Language model created by QuickLM on Sun Dec 16 13:25:13 EST 2018
+Language model created by QuickLM on Mon Apr  1 10:48:41 EDT 2019
 Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
 
 The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
@@ -7,46 +7,54 @@ The code that was used to produce this language model is available in Open Sourc
 Please visit http://www.speech.cs.cmu.edu/tools/ for more information
 
 The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
-This model based on a corpus of 7 sentences and 9 words
+This model based on a corpus of 9 sentences and 11 words
 
 \data\
-ngram 1=9
-ngram 2=14
-ngram 3=7
+ngram 1=11
+ngram 2=18
+ngram 3=9
 
 \1-grams:
 -0.7782 </s> -0.3010
 -0.7782 <s> -0.2218
--1.6232 ARE-YOU-FROM -0.2218
--1.6232 CAN-YOU-DO -0.2218
--1.6232 HOW-OLD-ARE-YOU -0.2218
--1.6232 INTRODUCE-YOURSELF -0.2218
--1.6232 SING-AND-DANCE -0.2218
--1.6232 TAKE-A-PHOTO -0.2218
--1.6232 TELL-A-FUNNY-JOKE -0.2218
+-1.7324 ARE-YOU-FROM -0.2218
+-1.7324 CAN-YOU-DO -0.2218
+-1.7324 FOLLOW-ME -0.2218
+-1.7324 HOW-OLD-ARE-YOU -0.2218
+-1.7324 INTRODUCE-YOURSELF -0.2218
+-1.7324 SING-AND-DANCE -0.2218
+-1.7324 STOP-FOLLOW -0.2218
+-1.7324 TAKE-A-PHOTO -0.2218
+-1.7324 TELL-A-FUNNY-JOKE -0.2218
 
 \2-grams:
--1.1461 <s> ARE-YOU-FROM 0.0000
--1.1461 <s> CAN-YOU-DO 0.0000
--1.1461 <s> HOW-OLD-ARE-YOU 0.0000
--1.1461 <s> INTRODUCE-YOURSELF 0.0000
--1.1461 <s> SING-AND-DANCE 0.0000
--1.1461 <s> TAKE-A-PHOTO 0.0000
--1.1461 <s> TELL-A-FUNNY-JOKE 0.0000
+-1.2553 <s> ARE-YOU-FROM 0.0000
+-1.2553 <s> CAN-YOU-DO 0.0000
+-1.2553 <s> FOLLOW-ME 0.0000
+-1.2553 <s> HOW-OLD-ARE-YOU 0.0000
+-1.2553 <s> INTRODUCE-YOURSELF 0.0000
+-1.2553 <s> SING-AND-DANCE 0.0000
+-1.2553 <s> STOP-FOLLOW 0.0000
+-1.2553 <s> TAKE-A-PHOTO 0.0000
+-1.2553 <s> TELL-A-FUNNY-JOKE 0.0000
 -0.3010 ARE-YOU-FROM </s> -0.3010
 -0.3010 CAN-YOU-DO </s> -0.3010
+-0.3010 FOLLOW-ME </s> -0.3010
 -0.3010 HOW-OLD-ARE-YOU </s> -0.3010
 -0.3010 INTRODUCE-YOURSELF </s> -0.3010
 -0.3010 SING-AND-DANCE </s> -0.3010
+-0.3010 STOP-FOLLOW </s> -0.3010
 -0.3010 TAKE-A-PHOTO </s> -0.3010
 -0.3010 TELL-A-FUNNY-JOKE </s> -0.3010
 
 \3-grams:
 -0.3010 <s> ARE-YOU-FROM </s>
 -0.3010 <s> CAN-YOU-DO </s>
+-0.3010 <s> FOLLOW-ME </s>
 -0.3010 <s> HOW-OLD-ARE-YOU </s>
 -0.3010 <s> INTRODUCE-YOURSELF </s>
 -0.3010 <s> SING-AND-DANCE </s>
+-0.3010 <s> STOP-FOLLOW </s>
 -0.3010 <s> TAKE-A-PHOTO </s>
 -0.3010 <s> TELL-A-FUNNY-JOKE </s>
 

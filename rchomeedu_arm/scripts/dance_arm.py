@@ -6,11 +6,14 @@
 """
 
 import rospy
+from std_msgs.msg import String
 from std_msgs.msg import Float64
 
 class Loop:
     def __init__(self):
         rospy.on_shutdown(self.cleanup)
+
+        rospy.Subscriber('/dance_arm', String, self.callback)
 
 	# publish command message to joints/servos of arm
     	self.joint1 = rospy.Publisher('/waist_controller/command',Float64)
@@ -36,7 +39,11 @@ class Loop:
 	self.joint4.publish(self.pos4)
 	self.joint5.publish(self.pos5)
 
-	while not rospy.is_shutdown():
+    def callback(self, msg):
+        print msg.data
+        if msg.data == "dance arm":        
+            count = 0
+	    while (count < 1):
 
 		# gesture 1
 		self.pos1 = 0.559
@@ -56,7 +63,7 @@ class Loop:
 		self.pos2 = -2.393
 		self.pos3 = -0.639
 		self.pos4 = 1.335
-		self.pos5 = -0.430
+		self.pos5 = 0.0
 		self.joint1.publish(self.pos1)
 		self.joint2.publish(self.pos2)
 		self.joint3.publish(self.pos3)
@@ -89,6 +96,8 @@ class Loop:
 		self.joint4.publish(self.pos4)
 		self.joint5.publish(self.pos5)
 		rospy.sleep(3)
+
+                count = count + 1
 
     def cleanup(self):
         rospy.loginfo("Shutting down robot arm....")

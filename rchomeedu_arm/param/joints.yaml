@@ -4,7 +4,7 @@ waist_controller:
         module: joint_position_controller
         type: JointPositionController
     joint_name: waist_joint
-    joint_speed: 0.17
+    joint_speed: 0.20
     motor:
         id: 1
         init: 512
@@ -17,7 +17,7 @@ shoulder_controller:
         module: joint_position_controller
         type: JointPositionController
     joint_name: shoulder_joint
-    joint_speed: 0.17
+    joint_speed: 0.20
     motor:
         id: 2
         init: 512
@@ -30,7 +30,7 @@ elbow_controller:
         module: joint_position_controller
         type: JointPositionController
     joint_name: elbow_joint
-    joint_speed: 0.17
+    joint_speed: 0.20
     motor:
         id: 3
         init: 512
@@ -43,7 +43,7 @@ wrist_controller:
         module: joint_position_controller
         type: JointPositionController
     joint_name: wrist_joint
-    joint_speed: 0.17
+    joint_speed: 0.20
     motor:
         id: 4
         init: 512
@@ -56,7 +56,7 @@ hand_controller:
         module: joint_position_controller
         type: JointPositionController
     joint_name: hand_joint
-    joint_speed: 0.17
+    joint_speed: 0.20
     motor:
         id: 5
         init: 512

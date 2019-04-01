@@ -43,6 +43,8 @@
     </node>
 
   <node name="soundplay_node" pkg="sound_play" type="soundplay_node.py"/>
+  <node name="dance_arm" pkg="rchomeedu_arm" type="dance_arm.py"/>
+  <node name="take_photo" pkg="rchomeedu_vision" type="take_photo_sub.py"/>
   <node name="partybot" pkg="rchomeedu_partybot" type="partybot.py" output="screen"/>
 
 </launch>
