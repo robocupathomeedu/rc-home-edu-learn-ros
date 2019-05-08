@@ -42,6 +42,7 @@ class TakePhoto:
 
         self.bridge = CvBridge()
         self.image_received = False
+        self.image = None # last image received
 
         if img_topic is None:
             img_topic = autoImageTopic()
@@ -61,13 +62,11 @@ class TakePhoto:
             rospy.Subscriber(takephoto_topic, String, self.take_photo_cb)
 
     def image_cb(self, data):
-
         # Convert image to OpenCV format
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data, "bgr8")
         except CvBridgeError as e:
             print(e)
-
         self.image_received = True
         self.image = cv_image
 
@@ -91,6 +90,20 @@ class TakePhoto:
         if msg.data == "take photo":
             # Take a photo
             self.take_picture('photo.jpg', usetimestamp=True)
+
+    def waitForImage(self):
+        time.sleep(0.5)
+        while not self.image_received:
+            time.sleep(0.5)
+
+
+
+def take_image():
+    rospy.init_node('take_image', anonymous=False)
+    camera = TakePhoto()
+    camera.waitForImage()
+    img = camera.image
+    return img
 
 
 if __name__ == '__main__':
