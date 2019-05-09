@@ -31,7 +31,7 @@ import argparse
 def autoImageTopic():
     topics = rospy.get_published_topics()
     for t in topics:
-        if t[1]=='sensor_msgs/Image':
+        if t[1]=='sensor_msgs/Image' and 'depth' not in t[0]:
             return t[0]
     return None
 
@@ -105,6 +105,9 @@ def take_image():
     img = camera.image
     return img
 
+# To use it from a local machine (other than the one running the camera node)
+# export ROS_IP=`hostname -I`
+# export ROS_MASTER_URI=http://10.3.1.1:11311
 
 if __name__ == '__main__':
 

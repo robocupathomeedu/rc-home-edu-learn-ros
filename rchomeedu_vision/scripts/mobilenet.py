@@ -22,8 +22,11 @@ from keras.applications import imagenet_utils, mobilenet
 
 categories = [
     ['banana', 'slug'], ['orange', 'ping-pong_ball'], 
-    ['pineapple'], ['cup', 'coffee_mug', 'coffeepot'], ['water_bottle'], 
-    ['plastic_bag'], ['volleyball', 'soccer_ball','rugby_ball','basketball'] ]
+    ['pineapple'], ['cup', 'coffee_mug', 'coffeepot'], ['water_bottle', 'wine_bottle'],
+    ['plastic_bag'],
+    ['volleyball', 'soccer_ball','rugby_ball','basketball','football_helmet'],
+    ['teddy', 'toy_poodle']
+ ]
 
 
 class MNetObjRec:
@@ -53,7 +56,7 @@ class MNetObjRec:
             c = CLASS_INDEX[k][1]
             if c in self.flat_categories:
                 self.imagenet_idx[c] = int(k)
-                print('%s: %d' %(c,int(k)))
+                #print('%s: %d' %(c,int(k)))
 
                
     # process an image to be mobilenet friendly 224x224x3
@@ -109,7 +112,7 @@ class MNetObjRec:
             if p>pbest:
                 pbest = p
                 cbest = c[0]
-        sr += '\n  >>> %s <<<\n' %cbest
+        sr += '\n  >>> %s %.2f <<<\n' %(cbest,pbest*100)
         print(sr)
         return cbest
 
