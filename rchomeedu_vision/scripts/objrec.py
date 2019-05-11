@@ -1,5 +1,5 @@
 import cv2
-import mobilenet
+import mobilenet_objrec
 import take_photo2
 import webimages
 import argparse
@@ -16,7 +16,7 @@ else:
 cv2.imshow('image',img)
 cv2.waitKey(1000)
 
-mnet = mobilenet.MNetObjRec()
+mnet = mobilenet_objrec.MNetObjRec()
 r = mnet.evalCVImage(img)
 print(r)
 
