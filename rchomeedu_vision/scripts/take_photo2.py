@@ -31,7 +31,7 @@ import argparse
 def autoImageTopic():
     topics = rospy.get_published_topics()
     for t in topics:
-        if t[1]=='sensor_msgs/Image' and 'depth' not in t[0]:
+        if t[1]=='sensor_msgs/Image' and 'depth' not in t[0] and '/ir/' not in t[0]:
             return t[0]
     return None
 
@@ -55,7 +55,7 @@ class TakePhoto:
         self.image_sub = rospy.Subscriber(img_topic, Image, self.image_cb)
 
         # Allow up to one second to connection
-        rospy.sleep(1)
+        time.sleep(1)
 
         if takephoto_topic!=None:
             rospy.loginfo("TakePhoto topic: %s" %takephoto_topic)
@@ -78,6 +78,7 @@ class TakePhoto:
                 timestr = time.strftime("%Y%m%d-%H%M%S-")
                 img_file = timestr + img_title
             # Save an image
+            rospy.loginfo("Saving image " + img_file)
             cv2.imwrite(img_file, self.image)
             rospy.loginfo("Saved image " + img_file)
             return True
@@ -132,12 +133,16 @@ if __name__ == '__main__':
     # Set output file
     if (img_title is not None):
 
+        print("Taking a photo")
+
         # Take and save the photo
         camera.take_picture(img_title)
 
         # Sleep to give the last log messages time to be sent
-        rospy.sleep(1)
+        time.sleep(1)
 
     else:
+        print("Running (CTRL-C to quit)")
+
         rospy.spin()
 
