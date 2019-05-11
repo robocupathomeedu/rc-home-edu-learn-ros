@@ -13,8 +13,11 @@ if args.web:
 else:
     img = take_photo2.take_image()
 
-cv2.imshow('image',img)
-cv2.waitKey(1000)
+try:
+    cv2.imshow('image',img)
+    cv2.waitKey(1000)
+except:
+    print('Cannot display image')
 
 mnet = mobilenet_objrec.MNetObjRec()
 r = mnet.evalCVImage(img)

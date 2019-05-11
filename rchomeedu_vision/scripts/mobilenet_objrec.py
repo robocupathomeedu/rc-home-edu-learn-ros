@@ -24,7 +24,8 @@ categories = [
     ['banana', 'slug'], ['orange', 'ping-pong_ball'], 
     ['pineapple'], ['cup', 'coffee_mug', 'coffeepot'], ['water_bottle', 'wine_bottle'],
     ['plastic_bag'],
-    ['volleyball', 'soccer_ball','rugby_ball','basketball','football_helmet'],
+    ['volleyball','tennis_ball','soccer_ball',
+     'rugby_ball','basketball','football_helmet'],
     ['teddy', 'toy_poodle']
  ]
 
