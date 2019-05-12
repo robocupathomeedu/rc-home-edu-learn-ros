@@ -6,6 +6,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Object Recognition Example')
 parser.add_argument('--web', help='get image from web', action='store_true')
+parser.add_argument('--show', help='show image', action='store_true')
 args = parser.parse_args()
 
 if args.web:
@@ -13,11 +14,9 @@ if args.web:
 else:
     img = take_photo2.take_image()
 
-try:
+if args.show:
     cv2.imshow('image',img)
     cv2.waitKey(1000)
-except:
-    print('Cannot display image')
 
 mnet = mobilenet_objrec.MNetObjRec()
 r = mnet.evalCVImage(img)
