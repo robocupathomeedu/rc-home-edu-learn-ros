@@ -5,7 +5,7 @@ import cv2
 #sudo pip install google_images_download
 from google_images_download import google_images_download
 
-list_objects = ['banana fruit', 'orange fruit', 'pineapple fruit', 'water bottle', 'coffee mug', 'plastic bag', 'volleyball ball']
+list_objects = ['banana fruit', 'orange fruit', 'pineapple fruit', 'water bottle', 'coffee mug', 'plastic bag', 'volleyball ball', 'fake faces']
 
 downloaddir = os.getenv('HOME')+"/Downloads/googleimagesdownload"
 
@@ -31,18 +31,19 @@ def get_from_cache(obj):
         l = []
 
     if len(l)<30:
-        download_images(obj,30)
+        download_images(obj,30-len(l))
 
     l = os.listdir(opath)
 
     return opath+"/"+random.choice(l)
 
 
-def take_image(showimg=False):
+def take_image(objcat=None, showimg=False):
 
-    obj = random.choice(list_objects)
+    if objcat is None:
+        objcat = random.choice(list_objects)
 
-    f = get_from_cache(obj)
+    f = get_from_cache(objcat)
 
     print(f)
 
