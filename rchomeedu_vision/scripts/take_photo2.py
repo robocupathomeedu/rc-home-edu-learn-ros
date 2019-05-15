@@ -86,6 +86,11 @@ class TakePhoto:
             rospy.loginfo("No images received")
             return False
 
+    def show_image(self):
+        if self.image_received:
+            cv2.imshow('image',self.image)
+            cv2.waitKey(3000)
+
     def take_photo_cb(self, msg):
         #print msg.data
         if msg.data == "take photo":
@@ -119,6 +124,7 @@ if __name__ == '__main__':
                         help="Topic name for takephoto subscriber (default: /take_photo)")
     parser.add_argument("-savefile", type=str, default=None,
                         help="Output base filename (default: None)")
+    parser.add_argument('--show', help='show image', action='store_true')
 
 
     args = parser.parse_args()
@@ -140,6 +146,10 @@ if __name__ == '__main__':
 
         # Sleep to give the last log messages time to be sent
         time.sleep(1)
+
+    elif args.show:
+
+        camera.show_image()
 
     else:
         print("Running (CTRL-C to quit)")
