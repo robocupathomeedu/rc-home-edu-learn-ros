@@ -115,7 +115,7 @@ class MNetObjRec:
                 cbest = c[0]
         sr += '\n  >>> %s %.2f <<<\n' %(cbest,pbest*100)
         print(sr)
-        return (cbest,pbest*100)
+        return cbest,pbest*100
 
 
 
