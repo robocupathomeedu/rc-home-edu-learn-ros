@@ -31,7 +31,7 @@ def get_from_cache(obj):
         l = []
 
     if len(l)<30:
-        download_images(obj,30-len(l))
+        download_images(obj,30)
 
     l = os.listdir(opath)
 
