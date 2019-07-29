@@ -119,9 +119,9 @@ class NavToPoint:
 if __name__=="__main__":
 
     parser = argparse.ArgumentParser(description='move_base navigation')
-    parser.add_argument('GX', type=float, help='Goal X')
-    parser.add_argument('GY', type=float, help='Goal Y')
-    parser.add_argument('GTH', type=float, help='Goal Theta [deg]')
+    parser.add_argument('GX', type=float, default=0, help='Goal X')
+    parser.add_argument('GY', type=float, default=0, help='Goal Y')
+    parser.add_argument('GTH', type=float, default=0, help='Goal Theta [deg]')
     parser.add_argument('--nonblocking', help='Send the goal in non-blocking mode', action='store_true')
     parser.add_argument('--stop', help='Cancel the goal and stop the robot', action='store_true')
 

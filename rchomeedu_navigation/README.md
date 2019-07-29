@@ -2,13 +2,16 @@
 
 ## Requirements
 
-* robot or simulator
+* robot base or simulator
+* sensor for localization (e.g., laser)
+* map of the environment
 * localizer (e.g., amcl)
 * path planner (e.g., move_base)
 
 ## Use
 
-* Launch robot, localizer, path planner
+* Launch robot base, sensor node, localizer (with map server and map), path planner
+
 * Run the command
 
         python navigation2.py [--nonblocking] [--stop] GX GY GTH
@@ -20,6 +23,7 @@
         python navigation2.py --nonblocking 0 0 0
 
         python navigation2.py --stop 0 0 0
+
 
 ## Program
 
