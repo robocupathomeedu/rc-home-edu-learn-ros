@@ -12,11 +12,12 @@
 ### Specific instructions for Turtlebot
 
 ** Command-line interface**
-```cd $CATKIN_WS/src/robot_bringup```
-```roslaunch ./start_turtle.launch```
 
-```cd $CATKIN_WS/src/robocup_nav_tutorial```
-```roslaunch ./map_setup.launch```
+ ```cd $CATKIN_WS/src/robot_bringup
+    roslaunch ./start_turtle.launch
+
+    cd $CATKIN_WS/src/robocup_nav_tutorial
+    roslaunch ./map_setup.launch```
 
 
 ### Specific instructions for MARRtino
