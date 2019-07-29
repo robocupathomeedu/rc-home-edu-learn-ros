@@ -24,7 +24,7 @@ roslaunch robot_bringup start_turtle.launch
 ```
 start navigation
 ```
-roslaunch robocup_nav_tutorial navigation.launch
+roslaunch robocup_nav_tutorial navigation_turtle.launch
 ```
 
 ### Specific instructions for MARRtino
