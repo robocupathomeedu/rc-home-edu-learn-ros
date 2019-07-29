@@ -11,7 +11,7 @@
 
 ### Specific instructions for Turtlebot
 
-** Command-line interface**
+**Command-line interface**
 
     cd $CATKIN_WS/src/robot_bringup
     roslaunch ./start_turtle.launch
