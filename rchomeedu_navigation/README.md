@@ -12,7 +12,6 @@
 **Command-line interface**
 ```
   cd ~/catkin/src/robocup_nav_tutorial/launch
-
 ```
 modify the launch file named navigation.launch, change the path with your map path
 
@@ -26,7 +25,6 @@ roslaunch robot_bringup start_turtle.launch
 start navigation
 ```
 roslaunch robocup_nav_tutorial navigation.launch
-
 ```
 
 ### Specific instructions for MARRtino
