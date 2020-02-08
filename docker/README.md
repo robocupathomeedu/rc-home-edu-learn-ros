@@ -2,19 +2,19 @@
 
 Dockerfile for RoboCup@Home Education
 
-Replace <version> with version shown in Dockerfile.
+Replace ''<version>'' with version shown in Dockerfile.
 
 Build an image
 
     cd <dir with Dockerfile>
     docker build -t ros-kinetic-rchomeedu:<version> .
 
-Run an image ('''run.bash''')
+Run an image (''run.bash'')
 
     docker run -it ros-kinetic-rchomeedu:<version>
 
 
-Run an image with X ('''run-X.bash''')
+Run an image with X (''run-X.bash'')
 
     docker run -it \
       -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
@@ -26,7 +26,7 @@ Run an image with X ('''run-X.bash''')
 
 
 
-Run an image with X and Nvidia drivers ('''run-X-nvidia.bash''')
+Run an image with X and Nvidia drivers (''run-X-nvidia.bash'')
 
     docker run -it \
       -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
