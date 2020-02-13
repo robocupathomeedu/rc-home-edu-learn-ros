@@ -1,6 +1,7 @@
 #!/bin/bash
 
-VERSION=0.3
+VERSION=0.4
+PLAYGROUND_FOLDER=$HOME/playground
 
 docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
@@ -8,7 +9,7 @@ docker run -it \
     --privileged \
     -e DISPLAY=$DISPLAY \
     --net=host \
+    -v $PLAYGROUND_FOLDER:/home/robot/playground \
     ros-kinetic-rchomeedu:$VERSION
-
 
 

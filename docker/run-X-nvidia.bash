@@ -11,6 +11,7 @@ docker run -it \
     -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
     --device /dev/dri \
     --net=host \
+    -v $PLAYGROUND_FOLDER:/home/robot/playground \
     ros-kinetic-rchomeedu:$VERSION
 
 # add in the container
