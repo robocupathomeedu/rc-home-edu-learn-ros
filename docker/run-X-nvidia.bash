@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.3
+VERSION=0.4
 
 docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \

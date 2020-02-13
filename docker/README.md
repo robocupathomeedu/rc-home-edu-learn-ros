@@ -45,10 +45,16 @@ Wiht X support for Nvidia drivers (`run-X-nvidia.bash`)
       -v $PLAYGROUND_FOLDER:/home/robot/playground \
       ros-kinetic-rchomeedu:<version>
 
-and add in the container
+Note: if you need to use a different Nvidia driver, change `/usr/lib/nvidia-384`
+as appropriate in the Dockerfile lines adding the following to `.bashrc`
 
     export PATH="/usr/lib/nvidia-384/bin":${PATH}
     export LD_LIBRARY_PATH="/usr/lib/nvidia-384:/usr/lib32/nvidia-384":${LD_LIBRARY_PATH}
+
+and in the run file 
+
+      -v /usr/lib/nvidia-384:/usr/lib/nvidia-384 \
+      -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
 
 
 ## Test
