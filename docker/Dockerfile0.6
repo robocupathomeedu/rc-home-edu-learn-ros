@@ -1,0 +1,43 @@
+# Docker file for RoboCup@HomeEducation
+# ROS Kinetic, navigation, perception & additional packages
+# Version 0.6 - Turtlebot support
+
+FROM ros-kinetic-rchomeedu:0.4 
+
+USER root
+
+ARG DEBIAN_FRONTEND=noninteractive
+
+# install libraries
+RUN apt-get update && \
+    apt-get install -y  <<<TODO>>>
+
+RUN rm -rf /var/lib/apt/lists/*
+
+
+USER robot
+
+# Turtlebot ROS node
+
+# TODO 
+RUN mkdir -p $HOME/src/turtlebot && cd $HOME/src/turtlebot && \
+    git clone <<<TODO>>> && \
+    git clone <<<TODO>>>
+
+
+# Set and compile ROS packages
+
+RUN cd $HOME/ros/catkin_ws/src && \
+    ln -s $HOME/src/<<<TODO>>> . && \
+    ln -s $HOME/src/<<<TODO>>> .
+
+RUN /bin/bash -c "source $HOME/ros/catkin_ws/devel/setup.bash; cd $HOME/ros/catkin_ws; catkin_make"
+
+
+# Set working dir and container command
+
+WORKDIR /home/robot
+
+CMD /usr/bin/tmux
+
+

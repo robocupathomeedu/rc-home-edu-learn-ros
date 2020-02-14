@@ -6,14 +6,17 @@ FROM ros:kinetic-ros-base-xenial
 
 ARG DEBIAN_FRONTEND=noninteractive
 
-# install ros packages
-RUN apt-get update && \
-    apt-get install -y ros-kinetic-desktop=1.3.2-0* && \
-    apt-get install -y ros-kinetic-navigation=1.14.5-1* && \
-    apt-get install -y ros-kinetic-perception=1.3.2-0* && \
-    apt-get install -y ros-kinetic-stage-ros=1.7.5-0* ros-kinetic-gmapping=1.3.10-0*
+# install libraries and ros packages 
+
+RUN apt-get update
 
 RUN apt-get install -y tmux less sudo eom
+
+RUN apt-get install -y ros-kinetic-desktop=1.3.2-0* && \
+    apt-get install -y ros-kinetic-navigation=1.14.5-1* && \
+    apt-get install -y ros-kinetic-perception=1.3.2-0* && \
+    apt-get install -y ros-kinetic-stage-ros=1.7.5-0* && \
+    apt-get install -y ros-kinetic-gmapping=1.3.10-0*
 
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -29,7 +32,7 @@ RUN echo "set -g mouse on" > $HOME/.tmux.conf
 
 # Init ROS workspace
 
-RUN mkdir -p /home/robot/ros/catkin_ws/src
+RUN mkdir -p $HOME/ros/catkin_ws/src
 
 RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash; cd /home/robot/ros/catkin_ws/src; catkin_init_workspace; cd ..; catkin_make"
 
