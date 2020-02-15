@@ -1,8 +1,17 @@
 #!/bin/bash
 
 VERSION=0.4
+
 ROBOT_DEVICE=/dev/ttyACM0
+if [ -f $ROBOT_DEVICE ]; then
+ROBOT_DEVICE=/dev/ttyACM0
+else
+ROBOT_DEVICE=/dev/null
+fi
+
 PLAYGROUND_FOLDER=$HOME/playground
+
+USER_UID=$(id -u)
 
 docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \

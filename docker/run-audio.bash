@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.4
+VERSION=0.7
 ROBOT_DEVICE=/dev/ttyACM0
 
 if [ -f $ROBOT_DEVICE ]; then
@@ -9,18 +9,18 @@ else
 ROBOT_DEVICE=/dev/null
 fi
 
+
 PLAYGROUND_FOLDER=$HOME/playground
+USER_UID=$(id -u)
+
 
 docker run -it \
-    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
-    --privileged \
-    -e DISPLAY=$DISPLAY \
-    -v /usr/lib/nvidia-384:/usr/lib/nvidia-384 \
-    -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
-    --device /dev/dri \
     --net=host \
+    --privileged \
     --device=$ROBOT_DEVICE \
+    --device=/dev/snd \
+    -v /run/user/${USER_UID}/pulse:/run/user/1000/pulse \
+    -v ~/.config/pulse/cookie:/home/robot/.config/pulse/cookie \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
     ros-kinetic-rchomeedu:$VERSION
 
