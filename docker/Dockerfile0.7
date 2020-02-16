@@ -1,6 +1,6 @@
 # Docker file for RoboCup@HomeEducation
 # ROS Kinetic, navigation, perception & additional packages
-# Version 0.7 - audio settings
+# Version 0.7 - audio/video settings
 
 FROM ros-kinetic-rchomeedu:0.4
 
@@ -15,13 +15,14 @@ RUN apt-get update
 RUN apt-get install -y nano python-pip alsa-base alsa-utils pulseaudio pulseaudio-utils \
     sox mplayer libttspico-utils 
 
-RUN apt-get install -y ros-kinetic-audio-common 
+RUN apt-get install -y ros-kinetic-audio-common ros-kinetic-usb-cam
 
 RUN rm -rf /var/lib/apt/lists/*
 
 COPY pulse-client.conf /etc/pulse/client.conf
 
 RUN adduser robot audio
+RUN adduser robot video
 
 
 USER robot

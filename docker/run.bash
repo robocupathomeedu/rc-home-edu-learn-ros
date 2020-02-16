@@ -13,6 +13,8 @@ echo "Running image $IMAGENAME:$VERSION ..."
 
 ROBOT_DEVICE=/dev/ttyACM0
 
+CAMERA_DEVICE=/dev/video0
+
 if [ -f $ROBOT_DEVICE ]; then
   echo "Robot device $ROBOT_DEVICE enabled"
 else
@@ -49,6 +51,7 @@ docker run -it \
     --privileged \
     --net=host \
     --device=$ROBOT_DEVICE \
+    --device=$CAMERA_DEVICE \
     $AUDIOSTR \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
     $IMAGENAME:$VERSION
