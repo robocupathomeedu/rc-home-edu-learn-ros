@@ -2,7 +2,7 @@ import os,sys
 import random
 import cv2
 
-#sudo pip install google_images_download
+# pip install google_images_download
 from google_images_download import google_images_download
 
 list_objects = ['banana fruit', 'orange fruit', 'pineapple fruit', 'water bottle', 'coffee mug', 'plastic bag', 'volleyball ball', 'fake faces']
@@ -16,7 +16,8 @@ def download_images(obj,n=30):
     #class instantiation
     response = google_images_download.googleimagesdownload()   
     #creating list of arguments
-    arguments = {"keywords":obj, "limit":n, "output_directory":downloaddir}
+    arguments = {"keywords":obj, "limit":n, 
+        "print_urls":True, "output_directory":downloaddir}
     #passing the arguments to the function and download in output directory
     response.download(arguments)
 

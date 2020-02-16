@@ -13,7 +13,9 @@ echo "Running image $IMAGENAME:$VERSION ..."
 
 ROBOT_DEVICE=/dev/ttyACM0
 
-if [ ! -f $ROBOT_DEVICE ]; then
+if [ -f $ROBOT_DEVICE ]; then
+  echo "Robot device $ROBOT_DEVICE enabled"
+else
   ROBOT_DEVICE=/dev/null
 fi
 
@@ -21,14 +23,23 @@ if [ -d /usr/lib/nvidia-384 ]; then
   NVIDIASTR="-v /usr/lib/nvidia-384:/usr/lib/nvidia-384 \
            -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
            --device /dev/dri"
-  echo "Nvidia libraries added"
+  echo "Nvidia support enabled"
 else
   NVIDIASTR=""
 fi
 
-PLAYGROUND_FOLDER=$HOME/playground
+if [ -d /run/user/$(id -u)/pulse ]; then
+  AUDIOSTR="--device=/dev/snd \
+           -v /run/user/$(id -u)/pulse:/run/user/1000/pulse \
+           -v $HOME/.config/pulse/cookie:/home/robot/.config/pulse/cookie"
+  echo "Audio support enabled"
+else
+  AUDIOSTR=""
+fi
 
-USER_UID=$(id -u)
+chmod go+rw ~/.config/pulse/cookie # this file needed by docker user
+
+PLAYGROUND_FOLDER=$HOME/playground
 
 docker run -it \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
@@ -38,6 +49,7 @@ docker run -it \
     --privileged \
     --net=host \
     --device=$ROBOT_DEVICE \
+    $AUDIOSTR \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
     $IMAGENAME:$VERSION
 
