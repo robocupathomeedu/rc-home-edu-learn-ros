@@ -8,6 +8,31 @@ Replace `<version>` with version shown in Dockerfile.
     cd <dir with Dockerfile>
     docker build -t ros-kinetic-rchomeedu:<version> .
 
+
+Incremental Dockerfiles can be used to add and test additional features.
+Some incremental Dockerfiles are present in this folder for testing purposes.
+You can also create your own incremental Dockerfile to add your own specific 
+components.
+
+To build an incremental Dockerfile
+ 
+    cd <dir with Dockerfile>
+    docker build -t ros-kinetic-rchomeedu:<version> -f Dockerfile<version> .
+
+
+## Delete an image
+
+Images use several GB of disk space. If you want to remove an image you are
+not using anymore, use the following commands:
+
+    docker image ls
+    REPOSITORY                TAG     IMAGE ID         ...
+    image-you-want-to-delete  0.0     6b82ade82afd     ...
+    
+    docker rmi -f <image name or image ID>
+
+
+
 ## Run an image 
 
 Create a folder to share files with the docker container.
