@@ -29,7 +29,7 @@ not using anymore, use the following commands:
     REPOSITORY                TAG     IMAGE ID         ...
     image-you-want-to-delete  0.0     6b82ade82afd     ...
     
-    docker rmi -f <image name or image ID>
+    docker rmi -f <image ID>
 
 
 
@@ -38,48 +38,25 @@ not using anymore, use the following commands:
 Create a folder to share files with the docker container.
 Default is `$HOME/playground`
 
-Without X support (`run.bash`)
+Run the image
 
-    docker run -it \
-      --net=host \
-      -v $PLAYGROUND_FOLDER:/home/robot/playground \
-      ros-kinetic-rchomeedu:$VERSION
+    cd rc-home-edu-learn-ros/docker
+    ./run.bash [version]
 
-With X support (`run-X.bash`)
+On the client machine, you may need to enable X clients
 
-    docker run -it \
-      -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-      -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
-      --privileged \
-      -e DISPLAY=$DISPLAY \
-      --net=host \
-      -v $PLAYGROUND_FOLDER:/home/robot/playground \
-      ros-kinetic-rchomeedu:<version>
+    xhost +
 
-Wiht X support for Nvidia drivers (`run-X-nvidia.bash`)
+If you need to use a different Nvidia driver, change `/usr/lib/nvidia-384`
+as appropriate in the Dockerfile
 
-    docker run -it \
-      -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-      -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
-      --privileged \
-      -e DISPLAY=$DISPLAY \
-      -v /usr/lib/nvidia-384:/usr/lib/nvidia-384 \
-      -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
-      --device /dev/dri \
-      --net=host \
-      -v $PLAYGROUND_FOLDER:/home/robot/playground \
-      ros-kinetic-rchomeedu:<version>
-
-Note: if you need to use a different Nvidia driver, change `/usr/lib/nvidia-384`
-as appropriate in the Dockerfile lines adding the following to `.bashrc`
-
-    export PATH="/usr/lib/nvidia-384/bin":${PATH}
-    export LD_LIBRARY_PATH="/usr/lib/nvidia-384:/usr/lib32/nvidia-384":${LD_LIBRARY_PATH}
+    RUN echo "  export PATH=\"/usr/lib/nvidia-384/bin:\${PATH}\"" >> $HOME/.bashrc
+    RUN echo "  export LD_LIBRARY_PATH=\"/usr/lib/nvidia-384:/usr/lib32/nvidia-384:\${LD_LIBRARY_PATH}\" " >> $HOME/.bashrc
 
 and in the run file 
 
-      -v /usr/lib/nvidia-384:/usr/lib/nvidia-384 \
-      -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
+    -v /usr/lib/nvidia-384:/usr/lib/nvidia-384 \
+    -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
 
 
 ## Test
