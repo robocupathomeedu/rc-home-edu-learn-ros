@@ -33,14 +33,15 @@ categories = [
 class MNetObjRec:
 
     def __init__(self):
+        print('Loading mobilenet model...')
         self.mnet = mobilenet.MobileNet()   # define the mobilenet model (not thread safe!!!)
         self.flat_categories = [y for x in categories for y in x]
         self.imagenet_idx = {}
         self.getimagenetclasses()
-
+        print('Done')
 
     def getimagenetclasses(self):
-        
+        print('Get imagenet classes...')
         CLASS_INDEX_PATH = ('https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json')
         
         fpath = keras.utils.get_file(
