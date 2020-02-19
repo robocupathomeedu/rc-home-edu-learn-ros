@@ -3,7 +3,8 @@
 # Use  ./run.bash [version]
 
 IMAGENAME=ros-kinetic-rchomeedu
-VERSION=0.4
+
+VERSION=0.5
 if [ ! "$1" == "" ]; then
   VERSION=$1
 fi

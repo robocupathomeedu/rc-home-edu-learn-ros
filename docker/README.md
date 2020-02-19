@@ -2,11 +2,7 @@
 
 ## Build an image
 
-Replace `<version>` with version shown in Dockerfile.
-
-
-    cd <dir with Dockerfile>
-    docker build -t ros-kinetic-rchomeedu:<version> .
+    ./build.bash [version] [Dockerfile]
 
 
 Incremental Dockerfiles can be used to add and test additional features.
@@ -14,10 +10,7 @@ Some incremental Dockerfiles are present in this folder for testing purposes.
 You can also create your own incremental Dockerfile to add your own specific 
 components.
 
-To build an incremental Dockerfile
- 
-    cd <dir with Dockerfile>
-    docker build -t ros-kinetic-rchomeedu:<version> -f Dockerfile<version> .
+To build an incremental Dockerfile, use '''build.bash''' with specific Dockerfile.
 
 
 ## Delete an image
@@ -29,7 +22,7 @@ not using anymore, use the following commands:
     REPOSITORY                TAG     IMAGE ID         ...
     image-you-want-to-delete  0.0     6b82ade82afd     ...
     
-    docker rmi -f <image ID>
+    docker rmi -f <IMAGE ID>
 
 
 
