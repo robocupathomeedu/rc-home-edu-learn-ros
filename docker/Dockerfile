@@ -25,6 +25,7 @@ RUN rm -rf /var/lib/apt/lists/*
 
 RUN useradd -ms /bin/bash robot && echo "robot:robot" | chpasswd && adduser robot sudo
 
+
 USER robot
 
 RUN echo "set -g mouse on" > $HOME/.tmux.conf 
@@ -34,9 +35,9 @@ RUN echo "set -g mouse on" > $HOME/.tmux.conf
 
 RUN mkdir -p $HOME/ros/catkin_ws/src
 
-RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash; cd /home/robot/ros/catkin_ws/src; catkin_init_workspace; cd ..; catkin_make"
+RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash; cd $HOME/ros/catkin_ws/src; catkin_init_workspace; cd ..; catkin_make"
 
-RUN echo "source /home/robot/ros/catkin_ws/devel/setup.bash" >> /home/robot/.bashrc
+RUN echo "source $HOME/ros/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
 
 RUN rosdep update
 
@@ -56,8 +57,8 @@ RUN mkdir -p $HOME/src && \
 RUN echo "export MARRTINO_APPS_HOME=$HOME/src/marrtino_apps" >> $HOME/.bashrc
 RUN echo "export ROBOT_TYPE=stage" >> $HOME/.bashrc
 RUN echo "if [ -d /usr/lib/nvidia-384/ ]; then" >> $HOME/.bashrc
-RUN echo "  export PATH=\"/usr/lib/nvidia-384/bin\":${PATH}" >> $HOME/.bashrc
-RUN echo "  export LD_LIBRARY_PATH=\"/usr/lib/nvidia-384:/usr/lib32/nvidia-384\":${LD_LIBRARY_PATH}" >> $HOME/.bashrc
+RUN echo "  export PATH=\"/usr/lib/nvidia-384/bin:\${PATH}\"" >> $HOME/.bashrc
+RUN echo "  export LD_LIBRARY_PATH=\"/usr/lib/nvidia-384:/usr/lib32/nvidia-384:\${LD_LIBRARY_PATH}\" " >> $HOME/.bashrc
 RUN echo "fi" >> $HOME/.bashrc
 
 

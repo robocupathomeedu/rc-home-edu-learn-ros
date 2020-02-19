@@ -1,5 +1,5 @@
-# sudo -H pip install tensorflow
-# sudo -H pip install keras
+# Requires Keras and Tensorflow
+# python2 -m pip install --user scipy==1.2.1 numpy==1.16.6 tensorflow==1.13.1 keras==2.2.4
 
 # For raspberry PI
 # swapon
@@ -133,7 +133,7 @@ class MobileNetServer(threading.Thread):
         server_address = ('', port)
         self.sock.bind(server_address)
         self.sock.listen(1)
-        print "MobileNet Server running on port ", port, " ..."
+        print("MobileNet Server running on port ", port, " ...")
         
         self.dorun = True # server running
         self.connection = None  # connection object
@@ -151,9 +151,9 @@ class MobileNetServer(threading.Thread):
                 self.connection, client_address = self.sock.accept()
                 self.connection.settimeout(3)
                 connected = True
-                print 'MobileNet Server: Connection from ', client_address
+                print('MobileNet Server: Connection from ', client_address)
             except:
-                pass #print "Listen again ..."    
+                pass #print("Listen again ...")   
 
 
     def run(self):
@@ -186,7 +186,7 @@ class MobileNetServer(threading.Thread):
                     elif (data == None or data==""):
                         break
             finally:
-                print 'MobileNet Server Connection closed.'
+                print('MobileNet Server Connection closed.')
                 # Clean up the connection
                 if (self.connection != None):
                     self.connection.close()
@@ -203,7 +203,7 @@ def dospin():
         try:
             time.sleep(120)
         except KeyboardInterrupt:
-            print "Exit"
+            print("Exit")
             run = False
 
 
