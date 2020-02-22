@@ -23,7 +23,10 @@ RUN apt-get install -y ros-kinetic-desktop=1.3.2-0* \
         ros-kinetic-stage-ros=1.7.5-0* \
         ros-kinetic-gmapping=1.3.10-0* \
         ros-kinetic-audio-common=0.3.3-0* \
-        ros-kinetic-usb-cam=0.3.5-0*
+        ros-kinetic-libuvc=0.0.6-1* \
+        ros-kinetic-rgbd-launch=2.2.2-0*
+
+# ros-kinetic-openni2-camera  ros-kinetic-openni2-launch
 
 RUN rm -rf /var/lib/apt/lists/*
 
@@ -60,7 +63,8 @@ RUN rosdep update
 
 RUN pip install --user setuptools==44 scipy==1.2.1 numpy==1.16.6 \
                        tensorflow==1.13.1 keras==2.2.4 \
-                       np_utils==0.5.12.1 mock==1.0.0
+                       np_utils==0.5.12.1 mock==1.0.0 \
+                       sox==1.3.7 pyalsaaudio==0.8.4
 
 
 # Get additional packages
@@ -70,7 +74,16 @@ RUN mkdir -p $HOME/src && \
     git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git && \
     git clone https://bitbucket.org/iocchi/marrtino_apps.git && \
     git clone https://bitbucket.org/iocchi/stage_environments.git && \
-    git clone https://github.com/Imperoli/gradient_based_navigation.git 
+    git clone https://github.com/Imperoli/gradient_based_navigation.git && \
+    git clone https://bitbucket.org/ggrisetti/thin_drivers.git
+
+RUN mkdir -p $HOME/src/ros && \
+    cd $HOME/src/ros && \
+    git clone https://github.com/seqsense/usb_cam.git  && \  
+    git clone https://github.com/orbbec/ros_astra_camera.git && \
+    git clone https://github.com/orbbec/ros_astra_launch.git && \
+    git clone https://bitbucket.org/iocchi/apriltags_ros.git
+
 
 # MARRtino ROS node
 
@@ -89,16 +102,22 @@ RUN echo "  export LD_LIBRARY_PATH=\"/usr/lib/nvidia-384:/usr/lib32/nvidia-384:\
 RUN echo "fi" >> $HOME/.bashrc
 
 
+
 # Set and compile ROS packages
 
 RUN cd $HOME/ros/catkin_ws/src && \
+    ln -s $HOME/src/ros/usb_cam . && \
+    ln -s $HOME/src/ros/ros_astra_camera . && \
+    ln -s $HOME/src/ros/ros_astra_launch . && \
+    ln -s $HOME/src/ros/apriltags_ros . && \
     ln -s $HOME/src/stage_environments . && \
     ln -s $HOME/src/gradient_based_navigation . && \
     ln -s $HOME/src/srrg/srrg_cmake_modules . && \
-    ln -s $HOME/src/srrg/srrg2_orazio .
+    ln -s $HOME/src/srrg/srrg2_orazio . && \
+    ln -s $HOME/src/thin_drivers/thin_msgs . && \
+    ln -s $HOME/src/thin_drivers/thin_state_publisher .
 
 RUN /bin/bash -c "source $HOME/ros/catkin_ws/devel/setup.bash; cd $HOME/ros/catkin_ws; catkin_make"
-
 
 
 # Set working dir and container command

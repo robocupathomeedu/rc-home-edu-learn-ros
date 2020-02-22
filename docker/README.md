@@ -54,17 +54,30 @@ and in the run file
 
 ## Test
 
-Run docker image with X support
+Run docker image
 
 tmux is started by deafult.
 For instructions about tmux, see for example https://tmuxcheatsheet.com/
+
+Execute each of the following commands in a new tmux window.
+To create a new tmux window, use `CTRL-b c`
+
+To move through tmux windows, use `CTRL-b <n>` where `<n>` is the number of the window.
+For example `CTRL-b 1` will go back to the window where you started stage.
+
+To move through tmux windows you can use also your mouse, by clicking on the name of the window in the bottom bar.
+
+To quit any module, move to the tux window and press `CTRL-c`. 
+To close a tmux window, type `exit` from it.
+
+
+### Moving the robot
 
 Launch stage simulator
 
     cd src/marrtino_apps/stage
     roslaunch simrobot.launch
 
-Open a new tmux window (`CTRL-b c`)
 
 Launch a simple program to move the robot
 
@@ -73,14 +86,8 @@ Launch a simple program to move the robot
     
 you should see the robot moving on Stage simulator.
 
-To move through tmux windows, use `CTRL-b <n>` where `<n>` is the number of the window.
-For example `CTRL-b 1` will go back to the window where you started stage.
 
-
-Test mapping and navigation
-
-
-Launch each module in a new window (use `CTRL-b c` to create new windows)
+### Mapping and navigation
 
 move_base navigation
 
@@ -104,7 +111,7 @@ Repeat this operation until you are happy with the map.
 
 Save the map
 
-Launch in a new window (`CTRL-b c`)
+Run map_saver
 
     cd playground
     rosrun map_server map_saver -f mymap
@@ -115,10 +122,50 @@ See the map
 
 Quit the application
 
-Move to each window `CTRL-b <n>` (or mouse click on the name of the window
-in the bottom bar), press `CTRL-c` to quit the module, type `exit` to close
-the window.
+Type `CTRL-c` on every module.
 
+
+### Audio
+
+Start the audio server 
+
+    cd $MARRTINO_APPS_HOME/audio
+    python audio_server.py
+
+You should hear some messages. 
+
+Send text to speech (also from other machine)
+
+    telnet <IP of audio server> 9001
+    TTS[en] hello world
+    TTS[it] ciao
+    CTRL-]
+    quit
+
+
+Quit the server
+
+Type `CTRL-c` on the audio server tmux window to quit the server.
+
+
+
+### Video
+
+
+Launch usb_cam ROS node
+
+    cd $MARRTINO_APPS_HOME/camera
+    roslaunch usbcam.launch viewimage:=true
+
+Adjust settings in usbcam.launch if needed.
+
+Note: support for RBGD cameras will be added soon!
+
+
+
+### Laser range finder
+
+Support for laser rande finders will be added soon.
 
 
 
