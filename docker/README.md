@@ -5,6 +5,8 @@
     ./build.bash [version] [Dockerfile]
 
 
+About 4 GB of disk space is needed.
+
 Incremental Dockerfiles can be used to add and test additional features.
 Some incremental Dockerfiles are present in this folder for testing purposes.
 You can also create your own incremental Dockerfile to add your own specific 
@@ -157,7 +159,7 @@ Launch usb_cam ROS node
     cd $MARRTINO_APPS_HOME/camera
     roslaunch usbcam.launch viewimage:=true
 
-Adjust settings in usbcam.launch if needed.
+Adjust settings in `camera/config/usbcam.yaml` if needed.
 
 Note: support for RBGD cameras will be added soon!
 

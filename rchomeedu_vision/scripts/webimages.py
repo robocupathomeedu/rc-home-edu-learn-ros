@@ -2,8 +2,10 @@ import os,sys
 import random
 import cv2
 
-# pip install google_images_download
-from google_images_download import google_images_download
+try:
+    from google_images_download import google_images_download
+except:
+    print('pip install --user google_images_download')
 
 list_objects = ['banana fruit', 'orange fruit', 'pineapple fruit', 'water bottle', 'coffee mug', 'plastic bag', 'volleyball ball', 'fake faces']
 
