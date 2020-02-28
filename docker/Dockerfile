@@ -1,6 +1,6 @@
 # Docker file for RoboCup@HomeEducation
 # ROS Kinetic, navigation, perception & additional packages
-# Version 0.5
+# Version 0.6
 
 FROM ros:kinetic-ros-base-xenial
 
@@ -24,7 +24,8 @@ RUN apt-get install -y ros-kinetic-desktop=1.3.2-0* \
         ros-kinetic-gmapping=1.3.10-0* \
         ros-kinetic-audio-common=0.3.3-0* \
         ros-kinetic-libuvc=0.0.6-1* \
-        ros-kinetic-rgbd-launch=2.2.2-0*
+        ros-kinetic-rgbd-launch=2.2.2-0* \
+        ros-kinetic-joy ros-kinetic-joystick-drivers
 
 # ros-kinetic-openni2-camera  ros-kinetic-openni2-launch
 
@@ -39,6 +40,7 @@ RUN useradd -ms /bin/bash robot && echo "robot:robot" | chpasswd && adduser robo
 
 RUN adduser robot audio
 RUN adduser robot video
+RUN adduser robot dialout
 
 
 ###### User robot ######
@@ -69,20 +71,22 @@ RUN pip install --user setuptools==44 scipy==1.2.1 numpy==1.16.6 \
 
 # Get additional packages
 
-RUN mkdir -p $HOME/src && \
-    cd $HOME/src && \
+RUN mkdir -p $HOME/src &&  cd $HOME/src && \
     git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git && \
     git clone https://bitbucket.org/iocchi/marrtino_apps.git && \
     git clone https://bitbucket.org/iocchi/stage_environments.git && \
     git clone https://github.com/Imperoli/gradient_based_navigation.git && \
     git clone https://bitbucket.org/ggrisetti/thin_drivers.git
 
-RUN mkdir -p $HOME/src/ros && \
-    cd $HOME/src/ros && \
+RUN mkdir -p $HOME/src/ros &&  cd $HOME/src/ros && \
     git clone https://github.com/seqsense/usb_cam.git  && \  
     git clone https://github.com/orbbec/ros_astra_camera.git && \
     git clone https://github.com/orbbec/ros_astra_launch.git && \
-    git clone https://bitbucket.org/iocchi/apriltags_ros.git
+    git clone https://bitbucket.org/iocchi/apriltags_ros.git && \
+    git clone https://github.com/ros-drivers/urg_c.git && \
+    git clone https://github.com/ros-drivers/urg_node.git && \
+    git clone https://github.com/Slamtec/rplidar_ros.git && \
+    git clone https://github.com/ros-perception/laser_proc.git 
 
 
 # MARRtino ROS node
@@ -110,6 +114,10 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/ros/ros_astra_camera . && \
     ln -s $HOME/src/ros/ros_astra_launch . && \
     ln -s $HOME/src/ros/apriltags_ros . && \
+    ln -s $HOME/src/ros/urg_c . && \
+    ln -s $HOME/src/ros/urg_node . && \
+    ln -s $HOME/src/ros/rplidar_ros . && \
+    ln -s $HOME/src/ros/laser_proc .  && \
     ln -s $HOME/src/stage_environments . && \
     ln -s $HOME/src/gradient_based_navigation . && \
     ln -s $HOME/src/srrg/srrg_cmake_modules . && \
