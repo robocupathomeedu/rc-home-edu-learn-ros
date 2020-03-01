@@ -17,17 +17,22 @@ RUN apt-get install -y tmux less sudo eom nano \
     python-pip alsa-base alsa-utils pulseaudio pulseaudio-utils \
     sox mplayer libttspico-utils libwebsockets-dev
 
-RUN apt-get install -y ros-kinetic-desktop=1.3.2-0* \
+RUN apt-get install -y \
+        ros-kinetic-desktop=1.3.2-0* \
         ros-kinetic-navigation=1.14.5-1* \
         ros-kinetic-perception=1.3.2-0* \
         ros-kinetic-stage-ros=1.7.5-0* \
         ros-kinetic-gmapping=1.3.10-0* \
+        ros-kinetic-joy=1.13.0-1* \
+        ros-kinetic-joystick-drivers=1.13.0-1*
+
+RUN apt-get install -y \
         ros-kinetic-audio-common=0.3.3-0* \
         ros-kinetic-libuvc=0.0.6-1* \
         ros-kinetic-rgbd-launch=2.2.2-0* \
-        ros-kinetic-joy=1.13.0-1* ros-kinetic-joystick-drivers=1.13.0-1* \
-        ros-kinetic-web-video-server=0.2.1-1* \
-        ros-kinetic-openni2-camera=0.4.2-0*  ros-kinetic-openni2-launch=0.4.2-0* \
+        ros-kinetic-web-video-server=0.2.1-1*
+
+RUN apt-get install -y \
         ros-kinetic-turtlebot ros-kinetic-turtlebot-apps \
         ros-kinetic-turtlebot-interactions ros-kinetic-turtlebot-simulator \
         ros-kinetic-kobuki-ftdi ros-kinetic-ar-track-alvar-msgs
