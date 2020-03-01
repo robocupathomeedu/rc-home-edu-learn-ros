@@ -4,7 +4,7 @@
 
 IMAGENAME=ros-kinetic-rchomeedu
 
-VERSION=0.7
+VERSION=0.8
 if [ ! "$1" == "" ]; then
   VERSION=$1
 fi
