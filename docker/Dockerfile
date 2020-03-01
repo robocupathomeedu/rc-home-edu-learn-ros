@@ -1,6 +1,6 @@
 # Docker file for RoboCup@HomeEducation
 # ROS Kinetic, navigation, perception & additional packages
-# Version 0.6
+# Version 0.7
 
 FROM ros:kinetic-ros-base-xenial
 
@@ -25,9 +25,9 @@ RUN apt-get install -y ros-kinetic-desktop=1.3.2-0* \
         ros-kinetic-audio-common=0.3.3-0* \
         ros-kinetic-libuvc=0.0.6-1* \
         ros-kinetic-rgbd-launch=2.2.2-0* \
-        ros-kinetic-joy ros-kinetic-joystick-drivers
-
-# ros-kinetic-openni2-camera  ros-kinetic-openni2-launch
+        ros-kinetic-joy=1.13.0-1* ros-kinetic-joystick-drivers=1.13.0-1* \
+        ros-kinetic-web-video-server=0.2.1-1* \
+        ros-kinetic-openni2-camera=0.4.2-0*  ros-kinetic-openni2-launch=0.4.2-0*
 
 RUN rm -rf /var/lib/apt/lists/*
 
