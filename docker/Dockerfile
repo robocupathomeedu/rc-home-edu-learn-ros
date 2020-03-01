@@ -32,6 +32,8 @@ RUN apt-get install -y \
         ros-kinetic-rgbd-launch=2.2.2-0* \
         ros-kinetic-web-video-server=0.2.1-1*
 
+RUN apt-get update
+
 RUN apt-get install -y \
         ros-kinetic-turtlebot ros-kinetic-turtlebot-apps \
         ros-kinetic-turtlebot-interactions ros-kinetic-turtlebot-simulator \
