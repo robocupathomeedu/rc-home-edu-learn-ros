@@ -2,6 +2,7 @@
 
 ## Build an image
 
+    cd rc-home-edu-learn-ros/docker
     ./build.bash [version] [Dockerfile]
 
 
@@ -13,6 +14,10 @@ You can also create your own incremental Dockerfile to add your own specific
 components.
 
 To build an incremental Dockerfile, use '''build.bash''' with specific Dockerfile.
+
+Example, for Turtlebot support
+
+    ./build.bash 0.8-turtlebot Dockerfile.turtlebot
 
 
 ## Delete an image
