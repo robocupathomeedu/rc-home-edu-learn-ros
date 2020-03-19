@@ -10,6 +10,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # install libraries and ros packages 
 
+RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+
 RUN apt-get update
 
 RUN apt-get install -y tmux less sudo eom nano \
