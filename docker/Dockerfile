@@ -79,7 +79,7 @@ RUN pip install --user setuptools==44 scipy==1.2.1 numpy==1.16.6 \
 
 # Libraries
 
-# 
+# g2o
 
 RUN mkdir -p $HOME/lib && cd $HOME/lib && \
     wget http://www.diag.uniroma1.it/iocchi/marrtino/lib/g2o-marrtino-src.tgz && \
@@ -127,6 +127,7 @@ RUN mkdir -p $HOME/src/srrg && cd $HOME/src/srrg && \
 
 
 # srrg_mapper
+
 RUN mkdir -p $HOME/src/srrg && cd $HOME/src/srrg && \
     git clone https://gitlab.com/srrg-software/srrg_core.git && \
     cd srrg_core && git checkout a8f88898 && cd .. && \
