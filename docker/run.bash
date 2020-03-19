@@ -4,7 +4,7 @@
 
 IMAGENAME=ros-kinetic-rchomeedu
 
-VERSION=0.8
+VERSION=0.9
 if [ ! "$1" == "" ]; then
   VERSION=$1
 fi
@@ -45,7 +45,8 @@ fi
 if [ -d /run/user/$(id -u)/pulse ]; then
   AUDIO_STR="--device=/dev/snd \
            -v /run/user/$(id -u)/pulse:/run/user/1000/pulse \
-           -v $HOME/.config/pulse/cookie:/home/robot/.config/pulse/cookie"
+           -v $HOME/.config/pulse/cookie:/opt/config/pulse/cookie"
+#           -v $HOME/.config/pulse/cookie:/home/robot/.config/pulse/cookie"
   echo "Audio support enabled"
 fi
 
