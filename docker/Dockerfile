@@ -60,7 +60,7 @@ RUN mkdir -p $HOME/ros/catkin_ws/src
 
 RUN /bin/bash -c "source /opt/ros/kinetic/setup.bash; cd $HOME/ros/catkin_ws/src; catkin_init_workspace; cd ..; catkin_make"
 
-RUN echo "source $HOME/ros/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
+RUN echo "source \$HOME/ros/catkin_ws/devel/setup.bash" >> $HOME/.bashrc
 
 RUN rosdep update
 
@@ -128,7 +128,7 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/thin_drivers/thin_msgs . && \
     ln -s $HOME/src/thin_drivers/thin_state_publisher .
 
-RUN /bin/bash -c "source $HOME/ros/catkin_ws/devel/setup.bash; cd $HOME/ros/catkin_ws; catkin_make"
+RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
 
 
 # Set working dir and container command

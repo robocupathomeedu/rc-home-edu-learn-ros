@@ -169,6 +169,21 @@ Adjust settings in `camera/config/usbcam.yaml` if needed.
 Note: support for RBGD cameras will be added soon!
 
 
+To enable access to RGBD cameras, add the following udev rules in your host system
+`/etc/rules.d/80-rgbd-cameras.rules` and restart udev `sudo service udev restart`
+
+    # Astra
+    SUBSYSTEM=="usb", ATTR{idProduct}=="0401", ATTR{idVendor}=="2bc5", MODE:="0666", OWNER:="root", GROUP:="video"
+    SUBSYSTEM=="usb", ATTR{idProduct}=="0402", ATTR{idVendor}=="2bc5", MODE:="0666", OWNER:="root", GROUP:="video"
+    SUBSYSTEM=="usb", ATTR{idProduct}=="0403", ATTR{idVendor}=="2bc5", MODE:="0666", OWNER:="root", GROUP:="video"
+    SUBSYSTEM=="usb", ATTR{idProduct}=="0404", ATTR{idVendor}=="2bc5", MODE:="0666", OWNER:="root", GROUP:="video"
+    SUBSYSTEM=="usb", ATTR{idProduct}=="0405", ATTR{idVendor}=="2bc5", MODE:="0666", OWNER:="root", GROUP:="video"
+
+    # xtion
+    SUBSYSTEM=="usb", ATTR{idProduct}=="0601", ATTR{idVendor}=="1d27", MODE:="0666", OWNER:="root", GROUP:="video"
+
+
+
 
 ### Laser range finder
 
