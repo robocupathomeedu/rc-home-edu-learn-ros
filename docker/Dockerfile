@@ -20,19 +20,19 @@ RUN apt-get install -y tmux less sudo eom nano \
     sox mplayer libttspico-utils libwebsockets-dev libsuitesparse-dev
 
 RUN apt-get install -y \
-        ros-kinetic-desktop=1.3.2-0* \
-        ros-kinetic-navigation=1.14.5-1* \
-        ros-kinetic-perception=1.3.2-0* \
-        ros-kinetic-stage-ros=1.7.5-0* \
-        ros-kinetic-gmapping=1.3.10-0* \
-        ros-kinetic-joy=1.13.0-1* \
-        ros-kinetic-joystick-drivers=1.13.0-1*
+        ros-kinetic-desktop \
+        ros-kinetic-navigation \
+        ros-kinetic-perception \
+        ros-kinetic-stage-ros \
+        ros-kinetic-gmapping \
+        ros-kinetic-joy \
+        ros-kinetic-joystick-drivers
 
 RUN apt-get install -y \
-        ros-kinetic-audio-common=0.3.3-0* \
-        ros-kinetic-libuvc=0.0.6-1* \
-        ros-kinetic-rgbd-launch=2.2.2-0* \
-        ros-kinetic-web-video-server=0.2.1-1*
+        ros-kinetic-audio-common \
+        ros-kinetic-libuvc \
+        ros-kinetic-rgbd-launch \
+        ros-kinetic-web-video-server
 
 RUN rm -rf /var/lib/apt/lists/*
 
