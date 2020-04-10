@@ -1,9 +1,20 @@
 # Dockerfile for RoboCup@Home Education
 
+## Versions available
+
+* Sub-folder `1604`
+
+    Ubuntu 16.04 + ROS Kinetic
+
+* Sub-folder `1804`
+
+    Ubuntu 18.04 + ROS Melodic
+
+
 ## Build an image
 
-    cd rc-home-edu-learn-ros/docker
-    ./build.bash [version] [Dockerfile]
+    cd rc-home-edu-learn-ros/docker/<1604|1804>
+    ./build.bash [Dockerfile] [version] 
 
 
 About 4 GB of disk space is needed.
@@ -17,7 +28,7 @@ To build an incremental Dockerfile, use '''build.bash''' with specific Dockerfil
 
 Example, for Turtlebot support
 
-    ./build.bash 0.8-turtlebot Dockerfile.turtlebot
+    ./build.bash Dockerfile.turtlebot turtlebot 
 
 
 ## Delete an image
@@ -40,7 +51,7 @@ Default is `$HOME/playground`
 
 Run the image
 
-    cd rc-home-edu-learn-ros/docker
+    cd rc-home-edu-learn-ros/docker/<1604|1804>
     ./run.bash [version]
 
 On the client machine, you may need to enable X clients
