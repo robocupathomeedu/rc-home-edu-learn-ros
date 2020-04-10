@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use  ./build.bash [Dockerfile] [version] 
+# Use  ./build.bash [Dockerfile] [version] [--no-cache]
 
 IMAGENAME=ros-melodic-rchomeedu
 
@@ -14,5 +14,5 @@ if [ ! "$2" == "" ]; then
   VERSION=$2
 fi
 
-docker build -t $IMAGENAME:$VERSION -f $DOCKERFILE .
+docker build $3 -t $IMAGENAME:$VERSION -f $DOCKERFILE .
 

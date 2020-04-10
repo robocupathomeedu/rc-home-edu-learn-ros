@@ -31,6 +31,21 @@ Example, for Turtlebot support
     ./build.bash Dockerfile.turtlebot turtlebot 
 
 
+
+## Build an updated image
+
+If you need to update an image after first build, use:
+
+    cd rc-home-edu-learn-ros/docker/<1604|1804>
+    ./build.bash Dockerfile.update <version>.update --no-cache
+
+
+To run the new updated version, use:
+
+    ./run.bash <version>.update
+
+
+
 ## Delete an image
 
 Images use several GB of disk space. If you want to remove an image you are
