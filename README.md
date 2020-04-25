@@ -2,7 +2,7 @@
 
 RoboCup@Home Education
 
-Learning resources: ROS sample codes
+Learning resources: ROS sample code
 
 Robot For All
 
