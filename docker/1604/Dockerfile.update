@@ -2,7 +2,7 @@
 # ROS Melodic, navigation, perception & additional packages
 # Update
 
-FROM ros-kinetic-rchomeedu:0.9
+FROM ros-kinetic-rchomeedu:1.0
 
 ###### User robot ######
 

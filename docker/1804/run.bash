@@ -4,7 +4,7 @@
 
 IMAGENAME=ros-melodic-rchomeedu
 
-VERSION=0.1
+VERSION=1.0
 if [ ! "$1" == "" ]; then
   VERSION=$1
 fi
@@ -61,6 +61,7 @@ docker run -it \
     -e DISPLAY=$DISPLAY \
     --privileged \
     --net=host \
+    -v /dev:/dev \
     $AUDIO_STR \
     -e ROBOT_DEVICE=$ROBOT_DEVICE \
     -e LASER_DEVICE=$LASER_DEVICE \

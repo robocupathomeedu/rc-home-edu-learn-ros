@@ -9,10 +9,11 @@ if [ ! "$1" == "" ]; then
   DOCKERFILE=$1
 fi
 
-VERSION=0.1
+VERSION=1.0
 if [ ! "$2" == "" ]; then
   VERSION=$2
 fi
 
-docker build $3 -t $IMAGENAME:$VERSION -f $DOCKERFILE .
+docker build -t $IMAGENAME:base -f Dockerfile.base . && \
+docker build -t $IMAGENAME:$VERSION -f $DOCKERFILE .
 
