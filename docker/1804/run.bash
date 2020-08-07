@@ -2,12 +2,24 @@
 
 # Use  ./run.bash [version]
 
-IMAGENAME=ros-melodic-rchomeedu
+IMAGEBASE=rchomeedu-1804-melodic
 
+IMAGENAME=iocchi/$IMAGEBASE
 VERSION=1.0
-if [ ! "$1" == "" ]; then
-  VERSION=$1
+
+if [ "$1" == "-local" ]; then
+  IMAGENAME=$IMAGEBASE
+  VER=$2
+else
+  VER=$1
 fi
+
+if [ "$VER" != "" ]; then
+  VERSION=$VER
+fi
+
+echo "$IMAGENAME:$VERSION"
+
 
 # change setings here if needed
 ROBOT_DEVICE=/dev/ttyACM0

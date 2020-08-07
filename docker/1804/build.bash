@@ -2,7 +2,7 @@
 
 # Use  ./build.bash [Dockerfile] [version] [--no-cache]
 
-IMAGENAME=ros-melodic-rchomeedu
+IMAGENAME=rchomeedu-1804-melodic
 
 DOCKERFILE=Dockerfile
 if [ ! "$1" == "" ]; then

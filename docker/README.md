@@ -11,6 +11,15 @@
     Ubuntu 18.04 + ROS Melodic
 
 
+## Images available in Docker Hub
+
+Follow instructions in
+
+https://hub.docker.com/repository/docker/iocchi/rchomeedu-1604-kinetic
+
+
+----
+
 ## Build an image
 
     cd rc-home-edu-learn-ros/docker/<1604|1804>
@@ -37,13 +46,7 @@ Example, for Turtlebot support
 If you need to update an image after first build, use:
 
     cd rc-home-edu-learn-ros/docker/<1604|1804>
-    ./build.bash Dockerfile.update <version>.update --no-cache
-
-
-To run the new updated version, use:
-
-    ./run.bash <version>.update
-
+    docker build --no-cache -t <IMAGENAME>:<VERSION> -f <DOCKERFILE> .
 
 
 ## Delete an image
@@ -58,6 +61,13 @@ not using anymore, use the following commands:
     docker rmi -f <IMAGE ID>
 
 
+## Cleaning images and containers
+
+The following commands can be used to remove unused images and containers.
+
+    docker image prune
+    docker container prune
+
 
 ## Run an image 
 
@@ -67,7 +77,9 @@ Default is `$HOME/playground`
 Run the image
 
     cd rc-home-edu-learn-ros/docker/<1604|1804>
-    ./run.bash [version]
+    ./run.bash -local [version]
+
+Note: ```-local``` option is needed to run local images, otherwise an image from docker hub is pulled.
 
 On the client machine, you may need to enable X clients
 
