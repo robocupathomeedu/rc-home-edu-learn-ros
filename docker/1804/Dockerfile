@@ -2,7 +2,7 @@
 # ROS Melodic, navigation, perception & additional packages
 # Version 1.0
 
-FROM ros-melodic-rchomeedu:base
+FROM rchomeedu-1804-melodic:base
 
 ARG DEBIAN_FRONTEND=noninteractive
 

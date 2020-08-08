@@ -1,8 +1,8 @@
 # Docker file for RoboCup@HomeEducation
 # ROS Kinetic, navigation, perception & additional packages
-# Version 1.0
+# Version 1.0.1
 
-FROM ros-kinetic-rchomeedu:base
+FROM rchomeedu-1604-kinetic:base
 
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -127,8 +127,15 @@ RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
 
 RUN pip install --user tornado==5.0.2
 
+# Install MODIM
+
 RUN cd $HOME/src && \
     git clone https://bitbucket.org/mtlazaro/modim.git
+
+# Update
+
+RUN cd $HOME/src/rc-home-edu-learn-ros && git pull && \
+    cd $HOME/src/marrtino_apps && git pull
 
 USER root
 

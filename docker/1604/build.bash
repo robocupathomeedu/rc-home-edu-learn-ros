@@ -9,17 +9,17 @@ if [ ! "$1" == "" ]; then
   DOCKERFILE=$1
 fi
 
-VERSION=1.0
+VERSION=1.0.1
 if [ ! "$2" == "" ]; then
   VERSION=$2
 fi
 
 if [ `docker image ls | grep $IMAGENAME | grep "base" | wc -l` == "0" ]; then
   echo "Building image $IMAGENAME:base"
-  docker build --no-cache -t $IMAGENAME:base -f Dockerfile.base . 
+  docker build --network=host -t $IMAGENAME:base -f Dockerfile.base . 
 fi
 
 echo "Building image $IMAGENAME:$VERSION"
 
-docker build -t $IMAGENAME:$VERSION -f $DOCKERFILE .
+docker build --network=host -t $IMAGENAME:$VERSION -f $DOCKERFILE .
 

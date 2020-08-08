@@ -1,5 +1,9 @@
 # Dockerfile for RoboCup@Home Education
 
+## Install docker
+
+Follow instructions in [docker web site](www.docker.com)
+
 ## Versions available
 
 * Sub-folder `1604`
@@ -11,25 +15,52 @@
     Ubuntu 18.04 + ROS Melodic
 
 
+## Quick reference
+
+To download and run the latest version from Docker Hub:
+
+ROS Kinetic on Ubuntu 16.04
+
+    cd rc-home-edu-learn-ros/docker/1604
+    ./create.bash
+    docker start rchomeedu-1604-kinetic
+    ...
+    docker stop rchomeedu-1604-kinetic
+
+
+ROS Kinetic on Ubuntu 16.04
+
+    cd rc-home-edu-learn-ros/docker/1804
+    ./create.bash
+    docker start rchomeedu-1804-melodic
+    ...
+    docker stop rchomeedu-1804-melodic
+
+
 ## Installation and run steps
 
 1. Install docker
-2. Pull or build an image
+2. Pull or build an image [optional]
 3. Create a container
 4. Start/stop a container
 
 
 ### 1. Install docker
 
-Follow instructions in [docker web site](www.docker.com)
+
  
 ### 2. Pull or build an image
 
-Pull images available in Docker Hub
+Note: if you want to pull the latest version from Docker Hub, just skip this section.
+
+----
+
+Pull an image available in Docker Hub
 
 Follow instructions in
 
 https://hub.docker.com/repository/docker/iocchi/rchomeedu-1604-kinetic
+
 
 ----
 
@@ -100,8 +131,8 @@ not using anymore, use the following commands:
 
 The following commands can be used to remove unused images and containers.
 
-    docker image prune
     docker container prune
+    docker image prune
 
 
 ## Other configuration notes

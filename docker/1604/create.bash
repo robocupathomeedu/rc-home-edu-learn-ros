@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# Use  ./run.bash [-local] [version]
+# Use  ./run.bash [-local|-dev] [version]
 
 IMAGEBASE=rchomeedu-1604-kinetic
 
 IMAGENAME=iocchi/$IMAGEBASE
-VERSION=1.0
+VERSION="1.0.1"
+
 CONTAINERNAME="${IMAGEBASE}"
 LOCALNAME=""
 
@@ -15,21 +16,19 @@ if [ "$1" == "-local" ]; then
   VER=$2
 elif [ "$1" == "-dev" ]; then
   IMAGENAME=$IMAGEBASE
-  LOCALNAME="_local"
+  LOCALNAME="_dev"
   VER=$2
   VOLUME_STR="-v $HOME/src/marrtino_apps:/home/robot/src/marrtino_apps"
 else
   VER=$1
 fi
 
-
-
 if [ "$VER" != "" ]; then
-  VERSION=$VER
+  VERSION="_${VER}"
 fi
 
 
-CONTAINERNAME=${CONTAINERNAME}_${VERSION}${LOCALNAME}
+CONTAINERNAME=${CONTAINERNAME}${LOCALNAME}
 
 echo "Image name: $IMAGENAME:$VERSION"
 
