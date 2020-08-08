@@ -4,6 +4,13 @@
 
 Follow instructions in [docker web site](www.docker.com)
 
+Some configuration notes:
+
+- Edit ```/etc/default/docker``` to add
+
+        DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+
+
 ## Versions available
 
 * Sub-folder `1604`
@@ -28,7 +35,7 @@ ROS Kinetic on Ubuntu 16.04
     docker stop rchomeedu-1604-kinetic
 
 
-ROS Kinetic on Ubuntu 16.04
+ROS Melodic on Ubuntu 18.04
 
     cd rc-home-edu-learn-ros/docker/1804
     ./create.bash
@@ -156,6 +163,14 @@ and in the run file
 ## Test
 
 Run a docker container
+
+### Web interface
+
+Open a browser and connect to the machine running the docker container (use ```localhost``` for docker running in the local machine).
+
+Start ROS nodes using the ```Bringup``` web page.
+
+Program the robot usin the ```Programming``` web pages.
 
 ### Terminal access
 
