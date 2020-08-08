@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use  ./build.bash [Dockerfile] [version] [--no-cache]
+# Use  ./build.bash [Dockerfile] [version]
 
 IMAGENAME=rchomeedu-1604-kinetic
 
@@ -14,6 +14,12 @@ if [ ! "$2" == "" ]; then
   VERSION=$2
 fi
 
-docker build -t $IMAGENAME:base -f Dockerfile.base . && \
+if [ `docker image ls | grep $IMAGENAME | grep "base" | wc -l` == "0" ]; then
+  echo "Building image $IMAGENAME:base"
+  docker build --no-cache -t $IMAGENAME:base -f Dockerfile.base . 
+fi
+
+echo "Building image $IMAGENAME:$VERSION"
+
 docker build -t $IMAGENAME:$VERSION -f $DOCKERFILE .
- 
+

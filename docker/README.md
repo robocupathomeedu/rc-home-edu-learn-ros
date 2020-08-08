@@ -11,22 +11,34 @@
     Ubuntu 18.04 + ROS Melodic
 
 
-## Images available in Docker Hub
+## Installation and run steps
+
+1. Install docker
+2. Pull or build an image
+3. Create a container
+4. Start/stop a container
+
+
+### 1. Install docker
+
+Follow instructions in [docker web site](www.docker.com)
+ 
+### 2. Pull or build an image
+
+Pull images available in Docker Hub
 
 Follow instructions in
 
 https://hub.docker.com/repository/docker/iocchi/rchomeedu-1604-kinetic
 
-
 ----
 
-## Build an image
+To build an image on your local system
 
     cd rc-home-edu-learn-ros/docker/<1604|1804>
     ./build.bash [Dockerfile] [version] 
 
-
-About 4 GB of disk space is needed.
+Note: About 4 GB of disk space is needed.
 
 Incremental Dockerfiles can be used to add and test additional features.
 Some incremental Dockerfiles are present in this folder for testing purposes.
@@ -40,16 +52,39 @@ Example, for Turtlebot support
     ./build.bash Dockerfile.turtlebot turtlebot 
 
 
-
-## Build an updated image
-
 If you need to update an image after first build, use:
 
     cd rc-home-edu-learn-ros/docker/<1604|1804>
     docker build --no-cache -t <IMAGENAME>:<VERSION> -f <DOCKERFILE> .
 
+### 3. Create a container
 
-## Delete an image
+Use the command
+
+    cd rc-home-edu-learn-ros/docker/<1604|1804>
+    ./create.bash [-local] [version]
+
+Note: use option ```-local``` if you built the image in the local system.
+
+See the list of all container names
+
+    docker container ls -a
+
+
+### 4. Start/stop a container
+
+    docker start <container_name>
+    docker stop <container_name>
+
+Example:
+
+    docker start rchomeedu-1604-kinetic_1.0
+
+Note: containers can also be managed with [portainer](https://www.portainer.io/)
+
+## Management of images and containers
+
+### Delete an image
 
 Images use several GB of disk space. If you want to remove an image you are
 not using anymore, use the following commands:
@@ -61,7 +96,7 @@ not using anymore, use the following commands:
     docker rmi -f <IMAGE ID>
 
 
-## Cleaning images and containers
+### Cleaning images and containers
 
 The following commands can be used to remove unused images and containers.
 
@@ -69,17 +104,7 @@ The following commands can be used to remove unused images and containers.
     docker container prune
 
 
-## Run an image 
-
-Create a folder to share files with the docker container.
-Default is `$HOME/playground`
-
-Run the image
-
-    cd rc-home-edu-learn-ros/docker/<1604|1804>
-    ./run.bash -local [version]
-
-Note: ```-local``` option is needed to run local images, otherwise an image from docker hub is pulled.
+## Other configuration notes
 
 On the client machine, you may need to enable X clients
 
@@ -99,9 +124,18 @@ and in the run file
 
 ## Test
 
-Run docker image
+Run a docker container
 
-tmux is started by deafult.
+### Terminal access
+
+Connect with tmux
+
+    docker exec -it <container_name>  /usr/bin/tmux
+
+If you want to attach an existing tmux session, use
+
+    docker exec -it <container_name>  /usr/bin/tmux a -t bringup
+
 For instructions about tmux, see for example https://tmuxcheatsheet.com/
 
 Execute each of the following commands in a new tmux window.

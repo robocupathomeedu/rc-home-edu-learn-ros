@@ -121,14 +121,32 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/srrg/srrg_mapper2d_ros . 
 
 RUN echo "export MARRTINO_VERSION=\"docker\"" >> $HOME/.bashrc
+RUN echo "docker" >> $HOME/.marrtino_version
 
 RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
 
+RUN pip install --user tornado==5.0.2
+
+RUN cd $HOME/src && \
+    git clone https://bitbucket.org/mtlazaro/modim.git
+
+USER root
+
+RUN apt update && \
+    apt install -y nginx
+
+RUN /bin/bash -ci "cd /var/www; mv html html.2; ln -s /home/robot/src/marrtino_apps/www html"
+
+RUN echo "robot ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/robot
+
+
+USER robot
 
 # Set working dir and container command
 
 WORKDIR /home/robot
 
-CMD /usr/bin/tmux
+CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_apps/bringup/1-bringup.bash", "-docker" ]
 
+#CMD /usr/bin/tmux
 
