@@ -24,39 +24,39 @@ Quick reference
 
         sudo usermod -aG docker $USER      
 
-Exit from the current shell and login again
+    Exit from the current shell and login again
 
-Edit ```/etc/default/docker``` to add
+    Edit ```/etc/default/docker``` to add
 
         DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
 
 
 2) [optional] set docker folder
 
-Standard folder for docker files is ```/var/lib/docker/```
+    Standard folder for docker files is ```/var/lib/docker/```
 
-If you want to change it, edit file /etc/docker/daemon.json with the following content
+    If you want to change it, edit file /etc/docker/daemon.json with the following content
 
         {
             "data-root": "/data/docker",
             "storage-driver": "overlay2"
         }
 
-replace /data/docker with the folder you want to use.
+    replace ```/data/docker``` with the folder you want to use.
 
 
 3) Restart docker service and test
 
-    sudo systemctl restart docker
+        sudo systemctl restart docker
 
-Check docker status
+4) Check docker status
 
-    sudo systemctl status docker
+        sudo systemctl status docker
 
-Test
+5) Test
 
-    docker image ls
-    docker run hello-world
+        docker image ls
+        docker run hello-world
 
 
 
@@ -97,10 +97,7 @@ Note: if you want to pull the latest version from Docker Hub, just skip this sec
 
 Pull an image available in Docker Hub
 
-Follow instructions in
-
 https://hub.docker.com/repository/docker/iocchi/rchomeedu-1604-kinetic
-
 
 ----
 
