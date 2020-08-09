@@ -1,16 +1,5 @@
 # Dockerfile for RoboCup@Home Education
 
-## Install docker
-
-Follow instructions in [docker web site](www.docker.com)
-
-Some configuration notes:
-
-- Edit ```/etc/default/docker``` to add
-
-        DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
-
-
 ## Versions available
 
 * Sub-folder `1604`
@@ -22,9 +11,58 @@ Some configuration notes:
     Ubuntu 18.04 + ROS Melodic
 
 
-## Quick reference
+## Install docker
 
-To download and run the latest version from Docker Hub:
+Follow instructions in [docker web site](www.docker.com)
+
+Quick reference
+
+1) Install docker
+        
+        sudo apt update
+        sudo apt install docker.io
+
+        sudo usermod -aG docker $USER      
+
+Exit from the current shell and login again
+
+Edit ```/etc/default/docker``` to add
+
+        DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
+
+
+2) [optional] set docker folder
+
+Standard folder for docker files is ```/var/lib/docker/```
+
+If you want to change it, edit file /etc/docker/daemon.json with the following content
+
+        {
+            "data-root": "/data/docker",
+            "storage-driver": "overlay2"
+        }
+
+replace /data/docker with the folder you want to use.
+
+
+3) Restart docker service and test
+
+    sudo systemctl restart docker
+
+Check docker status
+
+    sudo systemctl status docker
+
+Test
+
+    docker image ls
+    docker run hello-world
+
+
+
+## Download and run the latest version
+
+Quick reference
 
 ROS Kinetic on Ubuntu 16.04
 
@@ -46,17 +84,12 @@ ROS Melodic on Ubuntu 18.04
 
 ## Installation and run steps
 
-1. Install docker
-2. Pull or build an image [optional]
-3. Create a container
-4. Start/stop a container
-
-
-### 1. Install docker
-
-
+1. Pull or build an image [optional]
+2. Create a container
+3. Start/stop a container
+4. Test
  
-### 2. Pull or build an image
+### 1. Pull or build an image
 
 Note: if you want to pull the latest version from Docker Hub, just skip this section.
 
@@ -95,7 +128,29 @@ If you need to update an image after first build, use:
     cd rc-home-edu-learn-ros/docker/<1604|1804>
     docker build --no-cache -t <IMAGENAME>:<VERSION> -f <DOCKERFILE> .
 
-### 3. Create a container
+Notes for Raspberry: 
+
+1) You may need to enable the swap area for Raspberry with less than 2 GB sudo swapon /data/swapfile
+
+2) Edit Dockerfile.base to remove Python packages tensorflow, keras, ....
+
+3) Edit Dockerfile to add -j1 in catkin_make command
+
+----
+
+To push an image in the Docker Hub repository
+
+    docker tag <imagename>:<tag> <user>/<imagename>:<tag>
+    docker login
+
+Example:
+
+    docker tag rchomeedu-1604-kinetic:1.0 iocchi/rchomeedu-1604-kinetic:1.0
+    docker login
+    docker push iocchi/rchomeedu-1604-kinetic:1.0
+
+
+### 2. Create a container
 
 Use the command
 
@@ -109,7 +164,7 @@ See the list of all container names
     docker container ls -a
 
 
-### 4. Start/stop a container
+### 3. Start/stop a container
 
     docker start <container_name>
     docker stop <container_name>
@@ -119,6 +174,16 @@ Example:
     docker start rchomeedu-1604-kinetic_1.0
 
 Note: containers can also be managed with [portainer](https://www.portainer.io/)
+
+
+### 4. Test
+
+Open a browser and connect to the machine running the docker container (use ```localhost``` for docker running in the local machine).
+
+Start ROS nodes using the ```Bringup``` web page.
+
+Program the robot using the ```Programming``` web pages.
+
 
 ## Management of images and containers
 
@@ -160,17 +225,9 @@ and in the run file
     -v /usr/lib32/nvidia-384:/usr/lib32/nvidia-384 \
 
 
-## Test
+## Other functionalities
 
-Run a docker container
-
-### Web interface
-
-Open a browser and connect to the machine running the docker container (use ```localhost``` for docker running in the local machine).
-
-Start ROS nodes using the ```Bringup``` web page.
-
-Program the robot usin the ```Programming``` web pages.
+First, start the docker container.
 
 ### Terminal access
 
