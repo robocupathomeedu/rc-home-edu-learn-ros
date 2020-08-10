@@ -1,18 +1,15 @@
 #!/bin/bash
 
-# Use  ./build.bash [Dockerfile] [version]
+# Use  ./build.bash [version]
 
 IMAGENAME=rchomeedu-1804-melodic
 
-DOCKERFILE=Dockerfile
+VERSION=1.0.1
 if [ ! "$1" == "" ]; then
-  DOCKERFILE=$1
+  VERSION=$1
 fi
 
-VERSION=1.0.1
-if [ ! "$2" == "" ]; then
-  VERSION=$2
-fi
+DOCKERFILE=Dockerfile.$VERSION
 
 if [ `docker image ls | grep $IMAGENAME | grep "base" | wc -l` == "0" ]; then
   echo "Building image $IMAGENAME:base"

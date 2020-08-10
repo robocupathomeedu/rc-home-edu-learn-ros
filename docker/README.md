@@ -160,6 +160,12 @@ See the list of all container names
 
     docker container ls -a
 
+Note: this `create` script downloads and updates also the repositories that are attached as volumes to the docker image
+
+    rc-home-edu-learn-ros
+    marrtino_apps
+
+
 
 ### 3. Start/stop a container
 
@@ -170,8 +176,14 @@ Example:
 
     docker start rchomeedu-1604-kinetic_1.0
 
-Note: containers can also be managed with [portainer](https://www.portainer.io/)
 
+Note: the following folders from you local system are mounted in the docker container
+
+    $HOME/src/rc-home-edu-learn-ros   ->   /home/robot/src/rc-home-edu-learn-ros
+    $HOME/src/marrtino_apps           ->   /home/robot/src/marrtino_apps
+    $HOME/playground                  ->   /home/robot/playground
+
+Note: containers can also be managed with [portainer](https://www.portainer.io/)
 
 ### 4. Test
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use  ./run.bash [-local|-dev] [version]
+# Use  ./create.bash [-local] [version]
 
 IMAGEBASE=rchomeedu-1604-kinetic
 
@@ -14,11 +14,6 @@ if [ "$1" == "-local" ]; then
   IMAGENAME=$IMAGEBASE
   LOCALNAME="_local"
   VER=$2
-elif [ "$1" == "-dev" ]; then
-  IMAGENAME=$IMAGEBASE
-  LOCALNAME="_dev"
-  VER=$2
-  VOLUME_STR="-v $HOME/src/marrtino_apps:/home/robot/src/marrtino_apps"
 else
   VER=$1
 fi
@@ -79,6 +74,24 @@ fi
 chmod go+rw ~/.config/pulse/cookie # this file needed by docker user
 chmod go+xrw /run/user/$(id -u)/pulse # this file needed by docker user
 
+# rc-home-edu-learn-ros, marrtino_apps
+
+mkdir -p $HOME/src
+
+if [ ! -d $HOME/src/rc-home-edu-learn-ros ]; then
+    git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git
+else
+    cd $HOME/src/rc-home-edu-learn-ros
+    git pull
+fi
+
+if [ ! -d $HOME/src/marrtino_apps ]; then
+    git clone https://bitbucket.org/iocchi/marrtino_apps.git
+else
+    cd $HOME/src/marrtino_apps
+    git pull
+fi
+
 echo "Container name: $CONTAINERNAME"
 
 docker container rm $CONTAINERNAME
@@ -97,6 +110,8 @@ docker create -it \
     -e LASER_DEVICE=$LASER_DEVICE \
     -e CAMERA_DEVICE=$CAMERA_DEVICE \
     -e JOYSTICK_DEVICE=$JOYSTICK_DEVICE \
+    -v $HOME/src/rc-home-edu-learn-ros:/home/robot/src/rc-home-edu-learn-ros \
+    -v $HOME/src/marrtino_apps:/home/robot/src/marrtino_apps \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
     $VOLUME_STR \
     $IMAGENAME:$VERSION
@@ -105,6 +120,4 @@ docker create -it \
 echo "Container $IMAGENAME created."
 echo "Use docker start/stop $CONTAINERNAME to start stop the container."
 echo "Use docker exec -it $CONTAINERNAME <cmd> to execute a command."
-
-
 
