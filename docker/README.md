@@ -82,7 +82,9 @@ ROS Melodic on Ubuntu 18.04
     docker stop rchomeedu-1804-melodic
 
 
-## Installation and run steps
+## Manual installation and custom settings
+
+Note: These steps are not needed if you want to use the latest version.
 
 1. Pull or build an image [optional]
 2. Create a container
