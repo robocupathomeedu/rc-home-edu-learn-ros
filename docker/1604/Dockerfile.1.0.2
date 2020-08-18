@@ -1,11 +1,10 @@
 # Docker file for RoboCup@HomeEducation
 # ROS Kinetic, navigation, perception & additional packages
-# Version 1.0.1 - 9/8/2020
+# Version 1.0.2 - 9/8/2020
 
 FROM rchomeedu-1604-kinetic:base
 
-ARG DEBIAN_FRONTEND=noninteractive
-
+ARG MACHTYPE=default
 
 ###### User robot ######
 
@@ -36,11 +35,10 @@ RUN echo "" >> $HOME/.bashrc && \
 # Get additional packages
 
 RUN mkdir -p $HOME/src &&  cd $HOME/src && \
-    git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git && \
-    git clone https://bitbucket.org/iocchi/marrtino_apps.git && \
     git clone https://bitbucket.org/iocchi/stage_environments.git && \
     git clone https://github.com/Imperoli/gradient_based_navigation.git && \
-    git clone https://bitbucket.org/ggrisetti/thin_drivers.git
+    git clone https://bitbucket.org/ggrisetti/thin_drivers.git && \
+    git clone https://bitbucket.org/mtlazaro/modim.git
 
 RUN mkdir -p $HOME/src/ros &&  cd $HOME/src/ros && \
     git clone https://github.com/seqsense/usb_cam.git  && \  
@@ -58,7 +56,6 @@ RUN mkdir -p $HOME/src/ros &&  cd $HOME/src/ros && \
 RUN mkdir -p $HOME/src/srrg && cd $HOME/src/srrg && \
     git clone https://gitlab.com/srrg-software/srrg_cmake_modules.git && \
     git clone https://gitlab.com/srrg-software/srrg2_orazio.git
-
 
 # srrg_mapper
 
@@ -123,24 +120,18 @@ RUN cd $HOME/ros/catkin_ws/src && \
 RUN echo "export MARRTINO_VERSION=\"docker\"" >> $HOME/.bashrc
 RUN echo "docker" >> $HOME/.marrtino_version
 
-RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
+RUN if [ "$MACHTYPE" = "aarch64" ]; then \
+       /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j2" ; \
+    elif [ "$MACHTYPE" = "armv7l" ]; then \
+       /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make -j1" ; \
+    else \
+       /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make" ; \
+    fi
 
-RUN pip install --user tornado==5.0.2
-
-# Install MODIM
-
-RUN cd $HOME/src && \
-    git clone https://bitbucket.org/mtlazaro/modim.git
-
-# Update
-
-RUN cd $HOME/src/rc-home-edu-learn-ros && git pull && \
-    cd $HOME/src/marrtino_apps && git pull
 
 USER root
 
-RUN apt update && \
-    apt install -y nginx
+# Configure web server
 
 RUN /bin/bash -ci "cd /var/www; mv html html.2; ln -s /home/robot/src/marrtino_apps/www html"
 

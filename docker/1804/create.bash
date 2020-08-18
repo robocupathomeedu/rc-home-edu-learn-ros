@@ -2,7 +2,7 @@
 
 # Use  ./create.bash [-local] [version]
 
-IMAGEBASE=rchomeedu-1604-kinetic
+IMAGEBASE=rchomeedu-1804-melodic
 
 IMAGENAME=iocchi/$IMAGEBASE
 VERSION=`cat version.txt`

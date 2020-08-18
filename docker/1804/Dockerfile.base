@@ -4,6 +4,8 @@
 
 FROM ros:melodic-ros-base-bionic
 
+ARG MACHTYPE=default
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 ###### User root ######
@@ -12,30 +14,26 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
-RUN apt-get update
-
-RUN apt-get install -y tmux less sudo eom nano \
-    wget iputils-ping net-tools openssh-client \
-    python-pip alsa-base alsa-utils pulseaudio pulseaudio-utils \
-    libasound2-dev sox mplayer libttspico-utils libwebsockets-dev \
-    libsuitesparse-dev
-
-RUN apt-get install -y \
+RUN apt-get update && \
+    apt-get install -y \
+        tmux less sudo eom nano \
+        wget iputils-ping net-tools openssh-client nginx \
+        python-pip alsa-base alsa-utils pulseaudio pulseaudio-utils \
+        libasound2-dev sox mplayer libttspico-utils libwebsockets-dev \
+        libsuitesparse-dev && \
+    apt-get install -y \
         ros-melodic-desktop \
         ros-melodic-navigation \
         ros-melodic-perception \
         ros-melodic-stage-ros \
         ros-melodic-gmapping \
         ros-melodic-joy \
-        ros-melodic-joystick-drivers
-
-RUN apt-get install -y \
+        ros-melodic-joystick-drivers \
         ros-melodic-audio-common \
         ros-melodic-libuvc \
         ros-melodic-rgbd-launch \
-        ros-melodic-web-video-server
-
-RUN rm -rf /var/lib/apt/lists/*
+        ros-melodic-web-video-server && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY pulse-client.conf /etc/pulse/client.conf
 
@@ -68,10 +66,13 @@ RUN mkdir -p $HOME/Downloads
 
 RUN pip install --user sox==1.3.7 pyalsaaudio==0.8.4
 
-RUN pip install --user setuptools==44 scipy==1.2.1 numpy==1.16.6 \
+RUN if [ "$MACHTYPE" = "x86_64" ]; then \
+        pip install --user setuptools==44 scipy==1.2.1 numpy==1.16.6 \
                        markdown==2.6.8 tensorflow==1.13.1 keras==2.2.4 \
-                       np_utils==0.5.12.1 mock==1.0.0
+                       np_utils==0.5.12.1 mock==1.0.0 ; \
+    fi
 
+RUN pip install --user tornado==5.0.2
 
 # Init ROS workspace
 
