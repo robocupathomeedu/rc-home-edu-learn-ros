@@ -79,17 +79,23 @@ chmod go+xrw /run/user/$(id -u)/pulse # this file needed by docker user
 mkdir -p $HOME/src
 
 if [ ! -d $HOME/src/rc-home-edu-learn-ros ]; then
+    cd $HOME/src
     git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git
+    cd -
 else
     cd $HOME/src/rc-home-edu-learn-ros
     git pull
+    cd -
 fi
 
 if [ ! -d $HOME/src/marrtino_apps ]; then
+    cd $HOME/src
     git clone https://bitbucket.org/iocchi/marrtino_apps.git
+    cd -
 else
     cd $HOME/src/marrtino_apps
     git pull
+    cd -
 fi
 
 echo "Container name: $CONTAINERNAME"
