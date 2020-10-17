@@ -69,7 +69,9 @@ ROS Kinetic on Ubuntu 16.04
     cd rc-home-edu-learn-ros/docker/1604
     ./create.bash
     docker start rchomeedu-1604-kinetic
-    ...
+
+    <do something ...>
+
     docker stop rchomeedu-1604-kinetic
 
 
@@ -78,9 +80,28 @@ ROS Melodic on Ubuntu 18.04
     cd rc-home-edu-learn-ros/docker/1804
     ./create.bash
     docker start rchomeedu-1804-melodic
-    ...
+
+    <do something ...>
+
     docker stop rchomeedu-1804-melodic
 
+Note: if you are running a web server on port 80, make sure you quit the server before running this container.
+
+## Use the container
+
+A web server is running in the container to manage ROS applications with a web interface.
+
+Open a browser to URL
+
+    http://localhost
+
+### Example of test
+
+Select the ```Bringup``` tab, Connect to the server and launch the simulator ```SIMROBOT START```
+
+You should see Stage simulator running
+
+Use the ```Program``` tab to program the robot and see it moving in the simulated environment.
 
 ## Manual installation and custom settings
 
