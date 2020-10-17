@@ -145,8 +145,10 @@ To push an image in the Docker Hub repository
 Example:
 
     docker tag rchomeedu-1604-kinetic:1.0 iocchi/rchomeedu-1604-kinetic:1.0
+    docker tag rchomeedu-1604-kinetic:1.0 iocchi/rchomeedu-1604-kinetic:latest
     docker login
     docker push iocchi/rchomeedu-1604-kinetic:1.0
+    docker push iocchi/rchomeedu-1604-kinetic:latest
 
 
 ### 2. Create a container

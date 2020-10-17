@@ -1,0 +1,20 @@
+# Docker file for RoboCup@HomeEducation
+# ROS Kinetic, navigation, perception & additional packages
+# Version 1.0.3 - 17/10/2020
+# 
+
+FROM rchomeedu-1604-kinetic:1.0.2
+
+USER robot
+
+RUN cd $HOME/src/stage_environments && git pull && \
+    cd $HOME/src/gradient_based_navigation && git pull
+
+# Compile ROS packages
+
+RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
+
+WORKDIR /home/robot
+
+CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_apps/bringup/1-bringup.bash", "-docker" ]
+
