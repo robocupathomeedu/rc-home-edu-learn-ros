@@ -80,8 +80,7 @@ docker run -it \
     -e CAMERA_DEVICE=$CAMERA_DEVICE \
     -e JOYSTICK_DEVICE=$JOYSTICK_DEVICE \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
-    $IMAGENAME:$VERSION
-
-
+    $IMAGENAME:$VERSION \
+    tmux
 
 

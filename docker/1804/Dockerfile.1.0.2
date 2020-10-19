@@ -35,11 +35,10 @@ RUN echo "" >> $HOME/.bashrc && \
 # Get additional packages
 
 RUN mkdir -p $HOME/src &&  cd $HOME/src && \
-    git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git && \
-    git clone https://bitbucket.org/iocchi/marrtino_apps.git && \
     git clone https://bitbucket.org/iocchi/stage_environments.git && \
     git clone https://github.com/Imperoli/gradient_based_navigation.git && \
-    git clone https://bitbucket.org/ggrisetti/thin_drivers.git
+    git clone https://bitbucket.org/ggrisetti/thin_drivers.git && \
+    git clone https://bitbucket.org/mtlazaro/modim.git
 
 RUN mkdir -p $HOME/src/ros &&  cd $HOME/src/ros && \
     git clone https://github.com/seqsense/usb_cam.git  && \  
@@ -48,11 +47,10 @@ RUN mkdir -p $HOME/src/ros &&  cd $HOME/src/ros && \
     git clone https://github.com/ros-drivers/urg_c.git && \
     git clone https://github.com/ros-drivers/urg_node.git && \
     git clone https://github.com/Slamtec/rplidar_ros.git && \
-    git clone https://github.com/ros-perception/laser_proc.git 
-
-RUN cd $HOME/src/ros && \
+    git clone https://github.com/ros-perception/laser_proc.git  && \
     git clone https://github.com/RIVeR-Lab/apriltags_ros.git
 #   git clone https://bitbucket.org/iocchi/apriltags_ros.git NOT WORKING
+
 
 # MARRtino ROS node
 
@@ -133,10 +131,18 @@ RUN if [ "$MACHTYPE" = "aarch64" ]; then \
        /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make" ; \
     fi
 
+# marrtino_apps
 
-USER root
+RUN cd $HOME/src && git clone https://bitbucket.org/iocchi/marrtino_apps.git
+
+# rc-home-edu-learn-ros
+
+RUN cd $HOME/src && git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git
+
 
 # Configure web server
+
+USER root
 
 RUN /bin/bash -ci "cd /var/www; mv html html.2; ln -s /home/robot/src/marrtino_apps/www html"
 

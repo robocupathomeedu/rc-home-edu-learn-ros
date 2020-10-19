@@ -8,7 +8,10 @@ FROM rchomeedu-1604-kinetic:1.0.2
 USER robot
 
 RUN cd $HOME/src/stage_environments && git pull && \
-    cd $HOME/src/gradient_based_navigation && git pull
+    cd $HOME/src/gradient_based_navigation && git pull && \
+    cd $HOME/src/modim && git pull && \
+    cd $HOME/src/marrtino_apps && git pull && \
+    cd $HOME/src/rc-home-edu-learn-ros && git pull
 
 # Compile ROS packages
 
