@@ -28,4 +28,6 @@ echo "=====================================" &&
 docker build --network=host -t $IMAGENAME:$VERSION --build-arg MACHTYPE=`uname -m` \
     -f $DOCKERFILE . 
 
+docker tag $IMAGENAME:$VERSION $IMAGENAME:latest
+
 

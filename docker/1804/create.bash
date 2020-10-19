@@ -5,7 +5,7 @@
 IMAGEBASE=rchomeedu-1804-melodic
 
 IMAGENAME=iocchi/$IMAGEBASE
-VERSION=`cat version.txt`
+VERSION=latest
 
 CONTAINERNAME="${IMAGEBASE}"
 LOCALNAME=""

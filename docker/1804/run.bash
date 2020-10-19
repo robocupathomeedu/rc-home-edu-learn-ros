@@ -5,7 +5,7 @@
 IMAGEBASE=rchomeedu-1804-melodic
 
 IMAGENAME=iocchi/$IMAGEBASE
-VERSION=1.0
+VERSION=latest
 
 if [ "$1" == "-local" ]; then
   IMAGENAME=$IMAGEBASE

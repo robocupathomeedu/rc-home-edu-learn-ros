@@ -129,6 +129,8 @@ To build an image on your local system
     cd rc-home-edu-learn-ros/docker/<1604|1804>
     ./build.bash [Dockerfile] [version] 
 
+`build.bash` with no arguments will build the latest version.
+
 Note: About 4 GB of disk space is needed.
 
 Incremental Dockerfiles can be used to add and test additional features.
@@ -235,7 +237,7 @@ not using anymore, use the following commands:
 
 ### Cleaning images and containers
 
-The following commands can be used to remove unused images and containers.
+The following commands can be used to remove dangling images and containers.
 
     docker container prune
     docker image prune
