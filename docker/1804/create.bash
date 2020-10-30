@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use  ./create.bash [-local] [version]
+# Use  ./create.bash [version]
 
 IMAGEBASE=rchomeedu-1804-melodic
 
@@ -8,25 +8,12 @@ IMAGENAME=iocchi/$IMAGEBASE
 VERSION=latest
 
 CONTAINERNAME="${IMAGEBASE}"
-LOCALNAME=""
 
-if [ "$1" == "-local" ]; then
-  IMAGENAME=$IMAGEBASE
-  LOCALNAME="_local"
-  VER=$2
-else
-  VER=$1
+if [ "$1" != "" ]; then
+  VERSION=$1
 fi
-
-if [ "$VER" != "" ]; then
-  VERSION="_${VER}"
-fi
-
-
-CONTAINERNAME=${CONTAINERNAME}${LOCALNAME}
 
 echo "Image name: $IMAGENAME:$VERSION"
-
 echo "Container name: $CONTAINERNAME"
 
 
@@ -37,8 +24,6 @@ CAMERA_DEVICE=/dev/video0
 JOYSTICK_DEVICE=/dev/input/js0
 PLAYGROUND_FOLDER=$HOME/playground
 
-
-echo "Running image $IMAGENAME:$VERSION ..."
 
 if [ -e ${ROBOT_DEVICE} ]; then
   echo "Robot device ${ROBOT_DEVICE} found"
@@ -100,10 +85,9 @@ fi
 
 echo "Container name: $CONTAINERNAME"
 
-docker container rm $CONTAINERNAME
 
 docker create -it \
-    --name $CONTAINERNAME \
+    --name $CONTAINERNAME --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     $NVIDIA_STR \

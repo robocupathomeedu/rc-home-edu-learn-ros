@@ -1,8 +1,8 @@
 # Docker file for RoboCup@HomeEducation
 # ROS Melodic, navigation, perception & additional packages
-# Version 1.0.2 - 9/8/2020
+# Version 4 - 9/8/2020
 
-FROM rchomeedu-1804-melodic:base
+FROM iocchi/rchomeedu-1804-melodic:base
 
 ARG MACHTYPE=default
 
@@ -156,6 +156,4 @@ USER robot
 WORKDIR /home/robot
 
 CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_apps/bringup/1-bringup.bash", "-docker" ]
-
-#CMD /usr/bin/tmux
 

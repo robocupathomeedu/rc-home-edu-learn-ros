@@ -7,15 +7,10 @@ IMAGEBASE=rchomeedu-1804-melodic
 IMAGENAME=iocchi/$IMAGEBASE
 VERSION=latest
 
-if [ "$1" == "-local" ]; then
-  IMAGENAME=$IMAGEBASE
-  VER=$2
-else
-  VER=$1
-fi
+CONTAINERNAME="${IMAGEBASE}"
 
-if [ "$VER" != "" ]; then
-  VERSION=$VER
+if [ "$1" != "" ]; then
+  VERSION=$1
 fi
 
 echo "$IMAGENAME:$VERSION"
@@ -67,6 +62,7 @@ chmod go+xrw /run/user/$(id -u)/pulse # this file needed by docker user
 
 
 docker run -it \
+    --name $CONTAINERNAME --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     $NVIDIA_STR \

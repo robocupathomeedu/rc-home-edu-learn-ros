@@ -1,0 +1,29 @@
+# Docker file for RoboCup@HomeEducation
+# Updates
+# Version 4.0.5 - 30/10/2020
+# 
+
+FROM iocchi/rchomeedu-1804-melodic:4
+
+
+USER robot
+
+# Trick to disable cache from here
+ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
+
+RUN cd $HOME/src/stage_environments && git pull && \
+    cd $HOME/src/gradient_based_navigation && git pull && \
+    cd $HOME/src/modim && git pull && \
+    cd $HOME/src/marrtino_apps && git pull && \
+    cd $HOME/src/rc-home-edu-learn-ros && git pull
+
+RUN cd $HOME/src/marrtino_apps && git pull
+
+# Compile ROS packages
+
+RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
+
+WORKDIR /home/robot
+
+CMD [ "/bin/bash", "-ci", "/home/robot/src/marrtino_apps/bringup/1-bringup.bash", "-docker" ]
+

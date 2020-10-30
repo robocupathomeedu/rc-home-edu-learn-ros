@@ -19,20 +19,14 @@ RUN apt-get update && \
         tmux less sudo eom nano \
         wget iputils-ping net-tools openssh-client nginx \
         python-pip alsa-base alsa-utils pulseaudio pulseaudio-utils \
-        libasound2-dev sox mplayer libttspico-utils libwebsockets-dev \
-        libsuitesparse-dev && \
-    apt-get install -y \
-        ros-melodic-desktop \
-        ros-melodic-navigation \
-        ros-melodic-perception \
-        ros-melodic-stage-ros \
-        ros-melodic-gmapping \
-        ros-melodic-joy \
-        ros-melodic-joystick-drivers \
-        ros-melodic-audio-common \
-        ros-melodic-libuvc \
-        ros-melodic-rgbd-launch \
-        ros-melodic-web-video-server && \
+        libasound2-dev sox mplayer v4l-utils libttspico-utils libwebsockets-dev \
+        libsuitesparse-dev \
+        ros-melodic-desktop ros-melodic-navigation ros-melodic-perception \
+        ros-melodic-stage-ros ros-melodic-gmapping \
+        ros-melodic-joy ros-melodic-joystick-drivers \
+        ros-melodic-audio-common ros-melodic-libuvc \
+        ros-melodic-rgbd-launch ros-melodic-web-video-server && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 COPY pulse-client.conf /etc/pulse/client.conf
