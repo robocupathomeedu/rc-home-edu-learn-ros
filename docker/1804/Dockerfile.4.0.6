@@ -1,10 +1,9 @@
 # Docker file for RoboCup@HomeEducation
 # Updates
-# Version 4.0.5 - 30/10/2020
+# Version 4.0.6 - 19/11/2020
 # 
 
 FROM iocchi/rchomeedu-1804-melodic:4
-
 
 USER robot
 
@@ -16,8 +15,6 @@ RUN cd $HOME/src/stage_environments && git pull && \
     cd $HOME/src/modim && git pull && \
     cd $HOME/src/marrtino_apps && git pull && \
     cd $HOME/src/rc-home-edu-learn-ros && git pull
-
-RUN cd $HOME/src/marrtino_apps && git pull
 
 # Compile ROS packages
 
