@@ -13,7 +13,7 @@ if [ "$1" != "" ]; then
   VERSION=$1
 fi
 
-echo "$IMAGENAME:$VERSION"
+echo "Running image $IMAGENAME:$VERSION ..."
 
 
 # change setings here if needed

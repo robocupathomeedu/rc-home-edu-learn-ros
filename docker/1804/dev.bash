@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use  ./create.bash [version]
+# Use  ./run.bash [version]
 
 IMAGEBASE=rchomeedu-1804-melodic
 
@@ -13,10 +13,7 @@ if [ "$1" != "" ]; then
   VERSION=$1
 fi
 
-echo "Image name: $IMAGENAME:$VERSION"
-echo "Container name: $CONTAINERNAME"
-
-echo "Creating container $CONTAINERNAME from image $IMAGENAME:$VERSION ..."
+echo "$IMAGENAME:$VERSION"
 
 
 # change setings here if needed
@@ -26,6 +23,8 @@ CAMERA_DEVICE=/dev/video0
 JOYSTICK_DEVICE=/dev/input/js0
 PLAYGROUND_FOLDER=$HOME/playground
 
+
+echo "Running image $IMAGENAME:$VERSION ..."
 
 if [ -e ${ROBOT_DEVICE} ]; then
   echo "Robot device ${ROBOT_DEVICE} found"
@@ -61,9 +60,33 @@ fi
 chmod go+rw ~/.config/pulse/cookie # this file needed by docker user
 chmod go+xrw /run/user/$(id -u)/pulse # this file needed by docker user
 
+# rc-home-edu-learn-ros, marrtino_apps
 
-docker create -it \
-    --name $CONTAINERNAME \
+mkdir -p $HOME/src
+
+if [ ! -d $HOME/src/rc-home-edu-learn-ros ]; then
+    cd $HOME/src
+    git clone https://github.com/robocupathomeedu/rc-home-edu-learn-ros.git
+    cd -
+else
+    cd $HOME/src/rc-home-edu-learn-ros
+    git pull
+    cd -
+fi
+
+if [ ! -d $HOME/src/marrtino_apps ]; then
+    cd $HOME/src
+    git clone https://bitbucket.org/iocchi/marrtino_apps.git
+    cd -
+else
+    cd $HOME/src/marrtino_apps
+    git pull
+    cd -
+fi
+
+
+docker run -it \
+    --name $CONTAINERNAME --rm \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     $NVIDIA_STR \
@@ -76,13 +99,8 @@ docker create -it \
     -e LASER_DEVICE=$LASER_DEVICE \
     -e CAMERA_DEVICE=$CAMERA_DEVICE \
     -e JOYSTICK_DEVICE=$JOYSTICK_DEVICE \
-    -v $HOME/src/rc-home-edu-learn-ros:/home/robot/src/rc-home-edu-learn-ros \
-    -v $HOME/src/marrtino_apps:/home/robot/src/marrtino_apps \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
-    $IMAGENAME:$VERSION
+    $IMAGENAME:$VERSION \
+    tmux
 
-
-echo "Container $IMAGENAME created."
-echo "Use docker start/stop $CONTAINERNAME to start stop the container."
-echo "Use docker exec -it $CONTAINERNAME <cmd> to execute a command."
 
