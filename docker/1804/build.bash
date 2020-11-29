@@ -9,7 +9,7 @@ if [ ! "$1" == "" ]; then
   VERSION=$1
 fi
 
-DOCKERFILE=Dockerfile.$VERSION
+DOCKERFILE=Dockerfile.latest
 
 echo "=====================================" &&
 echo "Building image $IMAGENAME:base" &&
@@ -29,6 +29,7 @@ docker build --network=host -t $IMAGENAME:$VERSION --build-arg MACHTYPE=`uname -
 
 docker tag $IMAGENAME:$VERSION $IMAGENAME:latest
 
+# https://hub.docker.com/repository/docker/iocchi/rchomeedu-1804-melodic
 # docker login
 # docker push iocchi/rchomeedu-1804-melodic:latest
 

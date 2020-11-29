@@ -1,11 +1,13 @@
-# Docker file for RoboCup@HomeEducation
-# Updates
-# Version 4.0.6 - 19/11/2020
+# Docker file for RoboCup@HomeEducation and MARRtino apps
+#
+# Latest update
 # 
 
 FROM iocchi/rchomeedu-1804-melodic:4
 
 USER robot
+
+RUN echo "export MAPSDIR=$HOME/src/stage_environments/maps" >> $HOME/.bashrc
 
 # Trick to disable cache from here
 ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 

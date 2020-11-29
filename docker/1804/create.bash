@@ -87,7 +87,7 @@ echo "Container name: $CONTAINERNAME"
 
 
 docker create -it \
-    --name $CONTAINERNAME --rm \
+    --name $CONTAINERNAME \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
     -v $HOME/.Xauthority:/home/robot/.Xauthority:rw \
     $NVIDIA_STR \
