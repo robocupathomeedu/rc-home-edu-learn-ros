@@ -61,6 +61,7 @@ fi
 chmod go+rw ~/.config/pulse/cookie # this file needed by docker user
 chmod go+xrw /run/user/$(id -u)/pulse # this file needed by docker user
 
+docker container rm $CONTAINERNAME 
 
 docker create -it \
     --name $CONTAINERNAME \

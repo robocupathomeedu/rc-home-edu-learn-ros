@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Use  ./run.bash [version]
+# Use  ./run.bash [version] [command]
 
 IMAGEBASE=rchomeedu-1804-melodic
 
 IMAGENAME=iocchi/$IMAGEBASE
 VERSION=latest
 
-CONTAINERNAME="${IMAGEBASE}"
+CONTAINERNAME="${IMAGEBASE}"_run
 
 if [ "$1" != "" ]; then
   VERSION=$1
@@ -76,7 +76,6 @@ docker run -it \
     -e CAMERA_DEVICE=$CAMERA_DEVICE \
     -e JOYSTICK_DEVICE=$JOYSTICK_DEVICE \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
-    $IMAGENAME:$VERSION \
-    tmux
+    $IMAGENAME:$VERSION $2
 
 
