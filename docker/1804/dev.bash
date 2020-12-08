@@ -100,6 +100,7 @@ docker run -it \
     -e CAMERA_DEVICE=$CAMERA_DEVICE \
     -e JOYSTICK_DEVICE=$JOYSTICK_DEVICE \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
+    -v $HOME/src/marrtino_apps:/home/robot/src/marrtino_apps \
     $IMAGENAME:$VERSION \
     tmux
 
