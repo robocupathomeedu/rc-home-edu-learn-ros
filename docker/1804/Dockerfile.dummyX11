@@ -15,7 +15,8 @@ ADD http://xpra.org/xorg.conf /etc/X11/xorg.conf
 
 CMD ["/usr/bin/Xorg", "-noreset", "+extension", "GLX", "+extension", "RANDR", "+extension", "RENDER", "-logfile", "./xdummy.log", "-config", "/etc/X11/xorg.conf", ":1"]
 
-# docker build -t dummyx11 -f Dockerfile.dummyx11 .
+# docker build -t dummyx11 -f Dockerfile.dummyX11 .
 # docker volume create --name x11tmp
-# docker run --name dummyx11 --rm -v x11tmp:/tmp/.X11-unix dummyx11
+# docker create --name dummyx11 -v x11tmp:/tmp/.X11-unix dummyx11
+# docker start dummyx11
 

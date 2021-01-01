@@ -10,7 +10,9 @@ USER robot
 RUN echo "export MAPSDIR=$HOME/src/stage_environments/maps" >> $HOME/.bashrc
 
 # Trick to disable cache from here
-ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
+#ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
+ADD http://worldclockapi.com/api/json/utc/now /tmp/time.tmp 
+
 
 RUN cd $HOME/src/stage_environments && git pull && \
     cd $HOME/src/gradient_based_navigation && git pull && \
