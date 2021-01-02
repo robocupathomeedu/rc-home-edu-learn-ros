@@ -30,12 +30,19 @@ Quick reference
 
         DOCKER_OPTS="--dns 8.8.8.8 --dns 8.8.4.4"
 
+    or add in ```/etc/docker/daemon.json```
+
+        {
+          "dns": ["8.8.8.8"]
+        }
+
+
 
 2) [optional] set docker folder
 
     Standard folder for docker files is ```/var/lib/docker/```
 
-    If you want to change it, edit file /etc/docker/daemon.json with the following content
+    If you want to change it, edit file ```/etc/docker/daemon.json``` with the following content
 
         {
             "data-root": "/data/docker",
@@ -58,7 +65,10 @@ Quick reference
         docker image ls
         docker run hello-world
 
+6) [optional] docker start at boot
 
+        sudo systemctl enable docker
+        
 
 ## Download and run the latest version
 

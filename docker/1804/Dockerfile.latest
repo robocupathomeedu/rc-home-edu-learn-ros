@@ -10,7 +10,7 @@ USER robot
 RUN echo "export MAPSDIR=$HOME/src/stage_environments/maps" >> $HOME/.bashrc
 
 # Trick to disable cache from here
-#ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
+# -OLD- ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
 ADD http://worldclockapi.com/api/json/utc/now /tmp/time.tmp 
 
 
@@ -23,6 +23,21 @@ RUN cd $HOME/src/stage_environments && git pull && \
 # Compile ROS packages
 
 RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
+
+# <<< New >>>
+
+# shellinabox
+
+USER root
+
+RUN apt update && \
+    apt install -y openssl shellinabox
+
+ADD config/shellinabox /etc/default/shellinabox
+
+RUN service shellinabox start
+
+USER robot
 
 WORKDIR /home/robot
 
