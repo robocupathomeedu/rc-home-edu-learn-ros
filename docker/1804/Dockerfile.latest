@@ -7,7 +7,7 @@ FROM iocchi/rchomeedu-1804-melodic:4
 
 # <<< New >>>
 
-# shellinabox
+# shellinabox arduino
 
 USER root
 
