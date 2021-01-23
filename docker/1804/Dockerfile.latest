@@ -12,7 +12,7 @@ FROM iocchi/rchomeedu-1804-melodic:4
 USER root
 
 RUN apt update && \
-    apt install -y openssl shellinabox
+    apt install -y openssl shellinabox arduino arduino-mk
 
 ADD config/shellinabox /etc/default/shellinabox
 
@@ -38,6 +38,8 @@ RUN cd $HOME/src/stage_environments && git pull && \
 
 RUN /bin/bash -ci "cd $HOME/ros/catkin_ws; catkin_make"
 
+RUN echo "Mega2560" > $HOME/.marrtino_machine
+RUN echo "MARRtinoMB" > $HOME/.marrtino_motorboard
 
 WORKDIR /home/robot
 
