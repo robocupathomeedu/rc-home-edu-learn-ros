@@ -35,7 +35,6 @@ RUN echo "" >> $HOME/.bashrc && \
 # Get additional packages
 
 RUN mkdir -p $HOME/src &&  cd $HOME/src && \
-    git clone https://bitbucket.org/iocchi/stage_environments.git && \
     git clone https://github.com/Imperoli/gradient_based_navigation.git && \
     git clone https://bitbucket.org/ggrisetti/thin_drivers.git && \
     git clone https://bitbucket.org/mtlazaro/modim.git
@@ -96,8 +95,6 @@ RUN echo "  export PATH=\"/usr/lib/nvidia-384/bin:\${PATH}\"" >> $HOME/.bashrc
 RUN echo "  export LD_LIBRARY_PATH=\"/usr/lib/nvidia-384:/usr/lib32/nvidia-384:\${LD_LIBRARY_PATH}\" " >> $HOME/.bashrc
 RUN echo "fi" >> $HOME/.bashrc
 
-
-
 # Set and compile ROS packages
 
 RUN cd $HOME/ros/catkin_ws/src && \
@@ -109,7 +106,6 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/ros/rplidar_ros . && \
     ln -s $HOME/src/ros/laser_proc .  && \
     ln -s $HOME/src/ros/apriltags_ros . && \
-    ln -s $HOME/src/stage_environments . && \
     ln -s $HOME/src/gradient_based_navigation . && \
     ln -s $HOME/src/srrg/srrg_cmake_modules . && \
     ln -s $HOME/src/srrg/srrg2_orazio . && \

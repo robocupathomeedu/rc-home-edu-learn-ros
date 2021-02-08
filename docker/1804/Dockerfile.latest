@@ -12,7 +12,7 @@ FROM iocchi/rchomeedu-1804-melodic:4
 USER root
 
 RUN apt update && \
-    apt install -y openssl shellinabox arduino arduino-mk
+    apt install -y openssl shellinabox arduino arduino-mk netcat
 
 ADD config/shellinabox /etc/default/shellinabox
 
@@ -24,12 +24,9 @@ USER robot
 RUN echo "export MAPSDIR=$HOME/src/stage_environments/maps" >> $HOME/.bashrc
 
 # Trick to disable cache from here
-# OLD- ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
 ADD http://worldclockapi.com/api/json/utc/now /tmp/time.tmp 
 
-
-RUN cd $HOME/src/stage_environments && git pull && \
-    cd $HOME/src/gradient_based_navigation && git pull && \
+RUN cd $HOME/src/gradient_based_navigation && git pull && \
     cd $HOME/src/modim && git pull && \
     cd $HOME/src/marrtino_apps && git pull && \
     cd $HOME/src/rc-home-edu-learn-ros && git pull
