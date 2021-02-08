@@ -1,5 +1,5 @@
 4.1.1 - 7/2/2021
-- removed Stage and stage_environments (use stage_environments docker image)
+- link to stage_environments docker image
 
 4.1 - 23/1/2021
 - arduino dev, config updates
