@@ -12,7 +12,7 @@ def googlesr():
         r = sr.Recognizer()
         
         with sr.Microphone() as source:
-            print(">> Say something!")
+            print(">>> Say something!")
             #audio = r.listen(source)
             audio = r.record(source, duration=5)
             
