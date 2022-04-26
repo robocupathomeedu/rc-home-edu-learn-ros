@@ -2,7 +2,7 @@ version: "2.3"
 services:
 
   simulator:
-    image: stagepersondetection:gpu
+    image: rchomeedu_vision
     container_name: vision
     tty: true
     ipc: host
