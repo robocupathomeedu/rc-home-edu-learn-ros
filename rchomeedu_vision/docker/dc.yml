@@ -1,0 +1,15 @@
+version: "2.3"
+services:
+
+  simulator:
+    image: stagepersondetection:gpu
+    container_name: vision
+    tty: true
+    ipc: host
+    network_mode: host
+    volumes:
+      - $PWD:/opt/rchomeedu_vision
+    working_dir: /opt/rchomeedu_vision
+    entrypoint:
+      - bash
+ 

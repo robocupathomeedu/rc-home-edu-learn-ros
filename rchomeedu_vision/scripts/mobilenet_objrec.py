@@ -1,5 +1,6 @@
 # Requires Keras and Tensorflow
 # python2 -m pip install --user scipy==1.2.1 numpy==1.16.6 tensorflow==1.13.1 keras==2.2.4
+# pip install --user opencv-python==3.1.0.5
 
 # For raspberry PI
 # swapon
