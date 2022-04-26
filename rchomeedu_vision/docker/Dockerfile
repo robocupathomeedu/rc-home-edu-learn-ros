@@ -33,7 +33,7 @@ RUN usermod -u $UID robot && groupmod -g $GID robot
 
 RUN pip install \
     numpy pandas scipy matplotlib sklearn keras \
-    jupyter notebook opencv-python==3.1.0.5
+    jupyter notebook opencv-python
 
 #
 # USER robot
