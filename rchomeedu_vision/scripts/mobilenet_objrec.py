@@ -12,14 +12,15 @@ import os, sys, time, socket
 import threading
 
 import numpy as np
-import keras
 import json
 import argparse
 import cv2
+import tensorflow as tf
+import tensorflow.keras
 
-from keras import utils
-from keras.preprocessing import image
-from keras.applications import imagenet_utils, mobilenet
+from tensorflow.keras import utils
+from tensorflow.keras.preprocessing import image
+from tensorflow.keras.applications import imagenet_utils, mobilenet
 
 categories = [
     ['banana', 'slug'], ['orange', 'ping-pong_ball'], 
@@ -39,13 +40,13 @@ class MNetObjRec:
         self.flat_categories = [y for x in categories for y in x]
         self.imagenet_idx = {}
         self.getimagenetclasses()
-        print('Done')
+        print('Loading mobilenet model...Done')
 
     def getimagenetclasses(self):
         print('Get imagenet classes...')
         CLASS_INDEX_PATH = ('https://storage.googleapis.com/download.tensorflow.org/data/imagenet_class_index.json')
         
-        fpath = keras.utils.get_file(
+        fpath = utils.get_file(
             'imagenet_class_index.json',
             CLASS_INDEX_PATH,
             cache_subdir='models',
@@ -126,14 +127,19 @@ class MobileNetServer(threading.Thread):
     def __init__(self, port):
         threading.Thread.__init__(self)
 
+        # init net
+        self.mnet = MNetObjRec()
+
         # Create a TCP/IP socket
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.sock.settimeout(3) # timeout when listening (exit with CTRL+C)
+
         # Bind the socket to the port
         server_address = ('', port)
         self.sock.bind(server_address)
         self.sock.listen(1)
+
         print("MobileNet Server running on port ", port, " ...")
         
         self.dorun = True # server running
@@ -158,7 +164,7 @@ class MobileNetServer(threading.Thread):
 
 
     def run(self):
-        self.mnet = MNetObjRec()
+        
         while (self.dorun):
             self.connect()  # wait for connection
             try:
@@ -216,6 +222,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='MobileNet-ImageNet')
     parser.add_argument('-image', type=str, default=None, help='image file')
     parser.add_argument('--server', help='start server', action='store_true')
+    parser.add_argument('--init', help='init net', action='store_true')
 
     args = parser.parse_args()
 
@@ -233,6 +240,8 @@ if __name__ == '__main__':
         mnetserver.start()
         dospin() 
         mnetserver.stop()
+    elif args.init:
+        mnetserver = MobileNetServer(mnetport)
 
     sys.exit(0)
 
