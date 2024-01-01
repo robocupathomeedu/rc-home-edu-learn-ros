@@ -18,14 +18,13 @@ def googlesr():
             
         # recognize speech using Google Speech Recognition
         try:
-            result = r.recognize_google(audio)
+            result = r.recognize_google(audio, language="en-US")
             print("SR result: " + result)
+            pub.publish(result)
         except sr.UnknownValueError:
             print("SR could not understand audio")
         except sr.RequestError as e:
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
-        
-        pub.publish(result)
 
 if __name__ == '__main__':
     try:

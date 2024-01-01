@@ -8,7 +8,7 @@ def callback(data):
     rospy.loginfo("Input: %s", data.data)
 
     text = data.data
-    tts = gTTS(text)
+    tts = gTTS(text, lang="en-US")
     
     tts.save("speech.mp3")
     os.system("mpg321 speech.mp3")
