@@ -9,8 +9,23 @@
 * path planner (e.g., move_base)
 
 ### Specific instructions for Turtlebot
+**Command-line interface**
+```
+  cd ~/catkin/src/robocup_nav_tutorial/launch
+```
+modify the launch file named navigation.launch, change the path with your map path
 
-
+```
+<arg name="map_file" default="/home/usrname/catkin_ws/src/robocup_nav_tutorial/launch/maps/your_map_name.yaml" /> 
+```
+start your robot
+```
+roslaunch robot_bringup start_turtle.launch
+```
+start navigation
+```
+roslaunch robocup_nav_tutorial navigation_turtle.launch
+```
 
 ### Specific instructions for MARRtino
 
